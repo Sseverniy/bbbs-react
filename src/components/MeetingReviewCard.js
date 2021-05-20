@@ -1,16 +1,15 @@
 import React from "react";
-import { Link } from "react-router-dom";
 
 function MeetingReviewCard() {
   return (
-    <article className="card-container card-container_type_personal-area">
-      <div className="card personal-area__card personal-area__card_type_add-photo">
+    <article className='card-container card-container_type_personal-area'>
+      <div className='card personal-area__card personal-area__card_type_add-photo'>
         <button
-          aria-label="Кнопка добавления фотографии"
-          className="personal-area__add-photo-button"
-          type="button"
+          aria-label='Кнопка добавления фотографии'
+          className='personal-area__add-photo-button'
+          type='button'
         />
-        <p className="caption personal-area__bottom-caption">Загрузить фото</p>
+        <p className='caption personal-area__bottom-caption'>Загрузить фото</p>
       </div>
       <div className="card personal-area__card personal-area__card_type_content">
         <form action="" name="add-story-form" className="personal-area__form">
