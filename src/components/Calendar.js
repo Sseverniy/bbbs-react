@@ -8,6 +8,10 @@ function Calendar() {
       <Title />
       <section className="calendar-container page__section">
         <Meetup />
+        <Meetup />
+        <Meetup />
+        <Meetup />
+        <Meetup />
       </section>
     </>
   );
