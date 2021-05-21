@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useForm } from 'react-hook-form';
 import Modal from 'react-modal';
+import PropTypes from 'prop-types';
 
 Modal.setAppElement('#root');
 
@@ -38,5 +39,9 @@ function LoginPopup({ isOpen, toggleModal}) {
             </Modal>
         </div>
     );
+}
+LoginPopup.propTypes = {
+    isOpen: PropTypes.bool.isRequired,
+    toggleModal: PropTypes.func.isRequired,
 }
 export default LoginPopup;
