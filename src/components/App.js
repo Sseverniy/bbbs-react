@@ -22,7 +22,8 @@ function App() {
   function testButton() {
     getListCities().then((res) => {
       res.data.map((city) =>  console.log(city.name))
-    });
+    })
+    .catch((err) => {console.log(`Ошибка: ${err}`)})
   }
 
   return (
