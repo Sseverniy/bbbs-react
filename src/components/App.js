@@ -8,6 +8,9 @@ import Footer from "./Footer";
 import About from "./About";
 import PersonalArea from "./PersonalArea";
 import LoginPopup from "./LoginPopup";
+import CalendarCaptionPopup from "./CalendarCaptionPopup";
+import CalendarConfirmPopup from "./CalendarConfirmPopup";
+import CalendarDonePopup from "./CalendarDonePopup";
 
 function App() {
   // пока захардкодим, чтобы тестировать
@@ -28,6 +31,9 @@ function App() {
           </Route>
           <Route exact path="/calendar">
             <Calendar />
+            <CalendarCaptionPopup />
+            <CalendarConfirmPopup />
+            <CalendarDonePopup />
           </Route>
           <Route exact path="/about">
             <About />
