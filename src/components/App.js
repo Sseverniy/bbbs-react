@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import {
   withRouter,
   Switch,
@@ -6,10 +6,15 @@ import {
 } from "react-router-dom";
 import Main from "./Main";
 import Header from "./Header";
-import Calendar from "./Calendar"
+import Calendar from "./Calendar";
+import LoginPopup from "./LoginPopup";
 // import About from "./About"
 
 function App() {
+  const [isOpen, setIsOpen] = useState(false);
+  function toggleModal() {
+    setIsOpen(!isOpen);
+  }
   return (
     <div className="body">
       <Header />
@@ -25,6 +30,7 @@ function App() {
         </Route> */}
 
       </Switch>
+        <LoginPopup toggleModal={toggleModal} isOpen={isOpen}/>
     </div>
   );
 }
