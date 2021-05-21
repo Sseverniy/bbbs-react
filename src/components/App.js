@@ -17,7 +17,7 @@ function App() {
   }
   return (
     <div className="body">
-      <Header />
+      <Header toggleModal={toggleModal} />
       <Switch>
         <Route exact path="/">
           <Main />

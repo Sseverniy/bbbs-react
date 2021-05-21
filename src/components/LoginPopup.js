@@ -14,7 +14,6 @@ function LoginPopup({ isOpen, toggleModal}) {
 
     return (
         <div >
-            <button onClick={toggleModal} type='button'>Open modal</button>
             <Modal
                 isOpen={isOpen}
                 onRequestClose={toggleModal}
