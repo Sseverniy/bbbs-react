@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { NavLink } from 'react-router-dom';
+import React, { useState } from "react";
+import { NavLink } from "react-router-dom";
 
 function Header() {
   const [burgerClick, setBurgerClick] = useState(false)
@@ -33,76 +33,76 @@ function Header() {
   }
   console.log(burgerClick);
   return (
-    <header className={`header ${burgerClick === true ? 'heder_displayed' : ''} page__section`}>
-      <nav className={`menu ${searchButton === true ? 'menu_state_search' : ''}`}>
+    <header className={`header ${burgerClick === true ? "heder_displayed" : ""} page__section`}>
+      <nav className={`menu ${searchButton === true ? "menu_state_search" : ""}`}>
         <a href="./index.html" target="_self" className="menu__logo">
           наставники.про
         </a>
-        <div className={`menu__lists-wrap ${burgerWrap === true ? 'menu__lists-wrap_hidden' : ''}`}>
+        <div className={`menu__lists-wrap ${burgerWrap === true ? "menu__lists-wrap_hidden" : ""}`}>
           <ul className="menu__list">
             <li className="menu__list-item">
-              <NavLink exact to='/calendar' className="menu__link">
+              <NavLink exact to="/calendar" className="menu__link">
                 Календарь
               </NavLink>
             </li>
             <li className="menu__list-item">
-              <NavLink exact to='/where-to-go' className="menu__link">
+              <NavLink exact to="/where-to-go" className="menu__link">
                 Куда пойти
               </NavLink>
             </li>
             <li className="menu__list-item">
-              <NavLink exact to='/questions' className="menu__link">
+              <NavLink exact to="/questions" className="menu__link">
                 Вопросы
               </NavLink>
             </li>
             <li className="menu__list-item menu__dropdown-item">
-              <NavLink exact to='/read-and-watch' className="menu__link">
+              <NavLink exact to="/read-and-watch" className="menu__link">
                 Читать и смотреть
               </NavLink>
               <ul className="menu__dropdown-list">
                 <li className="menu__dropdown-list-item">
-                  <NavLink exact to='/directory' className="link menu__dropdown-link">
+                  <NavLink exact to="/directory" className="link menu__dropdown-link">
                     Справочник
                   </NavLink>
                 </li>
                 <li className="menu__dropdown-list-item">
-                  <NavLink exact to='/video' className="link menu__dropdown-link">
+                  <NavLink exact to="/video" className="link menu__dropdown-link">
                     Видео
                   </NavLink>
                 </li>
                 <li className="menu__dropdown-list-item">
                   <NavLink
-                    exact to='/articles'
+                    exact to="/articles"
                     className="link menu__dropdown-link"
                   >
                     Статьи
                   </NavLink>
                 </li>
                 <li className="menu__dropdown-list-item">
-                  <NavLink exact to='/films' className="link menu__dropdown-link">
+                  <NavLink exact to="/films" className="link menu__dropdown-link">
                     Фильмы
                   </NavLink>
                 </li>
                 <li className="menu__dropdown-list-item">
-                  <NavLink exact to='/books' className="link menu__dropdown-link">
+                  <NavLink exact to="/books" className="link menu__dropdown-link">
                     Книги
                   </NavLink>
                 </li>
               </ul>
             </li>
             <li className="menu__list-item">
-              <NavLink exact to='/childrens-rights' className="menu__link">
+              <NavLink exact to="/childrens-rights" className="menu__link">
                 Права детей
               </NavLink>
             </li>
             <li className="menu__list-item">
-              <NavLink exact to='/stories' className="menu__link">
+              <NavLink exact to="/stories" className="menu__link">
                 Истории
               </NavLink>
             </li>
           </ul>
 
-          <ul className={`menu__list menu__list_type_social ${menuListHidden === true ? 'menu__list_hidden' : ''}`}>
+          <ul className={`menu__list menu__list_type_social ${menuListHidden === true ? "menu__list_hidden" : ""}`}>
             <li className="menu__list-item">
               <a
                 href="https://www.facebook.com/BigBrothers.BigSisters.Russia/"
@@ -138,7 +138,7 @@ function Header() {
           </ul>
         </div>
 
-        <button className={`menu__burger ${burgerClick === true ? 'menu__burger_active' : ''}`} type="button" onClick={hendleBurgerClick} >
+        <button className={`menu__burger ${burgerClick === true ? "menu__burger_active" : ""}`} type="button" onClick={hendleBurgerClick} >
           <span className="menu__burger-line" />
           <span className="menu__burger-line" />
           <span className="menu__burger-line" />
@@ -154,7 +154,7 @@ function Header() {
                 title="Поиск"
                 onClick={hendleSearchButton}
               />
-              <div className={`search__options menu__search-options ${searchButton === true ? 'search__options_visible' : ''}`}>
+              <div className={`search__options menu__search-options ${searchButton === true ? "search__options_visible" : ""}`}>
                 <input
                   type="text"
                   name="search"
