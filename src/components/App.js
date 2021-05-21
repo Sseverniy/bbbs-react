@@ -6,9 +6,10 @@ import {
 } from "react-router-dom";
 import Main from "./Main";
 import Header from "./Header";
-import Calendar from "./Calendar";
+import Calendar from "./Calendar"
+import About from "./About"
+import Footer from "./Footer"
 import LoginPopup from "./LoginPopup";
-// import About from "./About"
 
 function App() {
   const [isOpen, setIsOpen] = useState(false);
@@ -25,12 +26,12 @@ function App() {
         <Route exact path="/calendar">
           <Calendar />
         </Route>
-        {/* <Route exact path="/about-us">
+        <Route exact path="/about">
           <About />
-        </Route> */}
-
+        </Route>
       </Switch>
-        <LoginPopup toggleModal={toggleModal} isOpen={isOpen}/>
+      <Footer />
+      <LoginPopup toggleModal={toggleModal} isOpen={isOpen}/>
     </div>
   );
 }
