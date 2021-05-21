@@ -8,19 +8,24 @@ import Footer from "./Footer";
 import About from "./About";
 import PersonalArea from "./PersonalArea";
 import LoginPopup from "./LoginPopup";
+import CitiesPopup from "./CitiesPopup";
 
 function App() {
   // пока захардкодим, чтобы тестировать
   const loggedIn = true;
   
-  const [isOpen, setIsOpen] = useState(false);
-  function toggleModal() {
-    setIsOpen(!isOpen);
+  const [isCitiesPopupOpen, setCitiesPopupOpen] = useState(false);
+  const [isLoginPopupOpen, setIsLoginPopupOpen] = useState(false);
+  function toggleModalCities() {
+    setCitiesPopupOpen(!isCitiesPopupOpen);
+  }
+  function toggleModalLogin() {
+    setIsLoginPopupOpen(!isLoginPopupOpen);
   }
 
   return (
     <>
-      <Header toggleModal={toggleModal} />
+      <Header toggleModal={toggleModalLogin} />
       <div className="main">
         <Switch>
           <Route exact path="/">
@@ -41,7 +46,8 @@ function App() {
         </Switch>
       </div>
       <Footer />
-      <LoginPopup toggleModal={toggleModal} isOpen={isOpen}/>
+      <LoginPopup toggleModal={toggleModalLogin} isOpen={isLoginPopupOpen}/>
+      <CitiesPopup toggleModal={toggleModalCities} isOpen={isCitiesPopupOpen}/>
     </>
   );
 }
