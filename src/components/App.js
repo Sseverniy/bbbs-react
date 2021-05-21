@@ -7,6 +7,7 @@ import {
 import Main from './Main';
 import Header from './Header';
 import Calendar from './Calendar'
+// import About from './About'
 
 function App() {
   return (
@@ -19,6 +20,9 @@ function App() {
         <Route exact path='/calendar'>
           <Calendar />
         </Route>
+        {/* <Route exact path='/about-us'>
+          <About />
+        </Route> */}
 
       </Switch>
     </div>
