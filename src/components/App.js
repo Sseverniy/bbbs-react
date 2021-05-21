@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import { withRouter, Switch, Route } from "react-router-dom";
 import ProtectedRoute from "./ProtectedRoute";
 import Main from "./Main";
@@ -8,20 +8,28 @@ import Footer from "./Footer";
 import About from "./About";
 import PersonalArea from "./PersonalArea";
 import LoginPopup from "./LoginPopup";
+import { getListCities } from "../utils/api";
 
 function App() {
   // пока захардкодим, чтобы тестировать
   const loggedIn = true;
-  
+
   const [isOpen, setIsOpen] = useState(false);
   function toggleModal() {
     setIsOpen(!isOpen);
+  }
+
+  function testButton() {
+    getListCities().then((res) => {
+      console.log(res.data[1].name)
+    });
   }
 
   return (
     <>
       <Header toggleModal={toggleModal} />
       <div className="main">
+      <button style={{background: "red"}} type="button" onClick={testButton}>ЭТО КНОПКА</button>
         <Switch>
           <Route exact path="/">
             <Main />
@@ -41,7 +49,7 @@ function App() {
         </Switch>
       </div>
       <Footer />
-      <LoginPopup toggleModal={toggleModal} isOpen={isOpen}/>
+      <LoginPopup toggleModal={toggleModal} isOpen={isOpen} />
     </>
   );
 }

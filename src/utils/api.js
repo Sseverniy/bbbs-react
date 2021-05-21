@@ -1,5 +1,6 @@
 const axios = require("axios");
 const MockAdapter = require("axios-mock-adapter");
+
 const mock = new MockAdapter(axios);
 
 const BASE_URL = "http://127.0.0.1:8000/api/v1";
@@ -8,52 +9,47 @@ const headers = {
   "Content-Type": "application/json",
 };
 
-export const authorize = ({ username, password }) => {
-  return axios.post(`${BASE_URL}/token`, {
-    headers,
-    data: { username: "admin", password: "admin" },
-  });
-};
+// export const authorize = ({ username, password }) => {
+//   return axios.post(`${BASE_URL}/token`, {
+//     headers,
+//     data: { username: "admin", password: "admin" },
+//   });
+// };
 
-export const getListCities = () => {
-  return axios.get(`${BASE_URL}/cities`, {
+export const getListCities = () =>
+  axios.get(`${BASE_URL}/cities`, {
     headers,
   });
-};
 
-export const getInfoProfileUsers = () => {
-  return axios.get(`${BASE_URL}/profile`, {
+export const getInfoProfileUsers = () =>
+  axios.get(`${BASE_URL}/profile`, {
     header: {
       ...headers,
       Authorization: `Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjIwNTM4OTMzLCJqdGkiOiIwOWZlNWUxNmI1MjI0YmM3ODJiYTc1YmM1OWExZWUzZSIsInVzZXJfaWQiOjF9._cDyG8Vp2HWzPPp-Hrm-P5FD5P0zcywVd4o4Gt2FL2M`,
     },
   });
-};
 
-export const getHomePage = () => {
-  return axios.get(`${BASE_URL}/main`, {
+export const getHomePage = () =>
+  axios.get(`${BASE_URL}/main`, {
     headers,
   });
-};
 
-export const getListEvents = () => {
-  return axios.get(`${BASE_URL}/afisha/events`, {
+export const getListEvents = () =>
+  axios.get(`${BASE_URL}/afisha/events`, {
     header: {
       ...headers,
       Authorization: `Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjIwNTM4NDU2LCJqdGkiOiIwMTJjMTMzNGQ5MjM0MWI4YWU1YmJhMDExYjAyMTdjOCIsInVzZXJfaWQiOjF9.S4JVKaVnUzr_XmLXOs6pfYKsLBhzEzm9Rhj1jnW6fhc`,
     },
   });
-};
 
-export const signUpForEvent = () => {
-  return axios.post(`${BASE_URL}/afisha/event-participants`, {
+export const signUpForEvent = () =>
+  axios.post(`${BASE_URL}/afisha/event-participants`, {
     header: {
       ...headers,
       Authorization: `Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjIwNTM4OTMzLCJqdGkiOiIwOWZlNWUxNmI1MjI0YmM3ODJiYTc1YmM1OWExZWUzZSIsInVzZXJfaWQiOjF9._cDyG8Vp2HWzPPp-Hrm-P5FD5P0zcywVd4o4Gt2FL2M`,
       data: { event: 1 },
     },
   });
-};
 
 mock.onPost(`${BASE_URL}/token`).reply(200, {
   refresh:
