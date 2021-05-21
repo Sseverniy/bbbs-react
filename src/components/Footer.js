@@ -1,12 +1,12 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
-import logo from "../sourse/sass/images/svg/footer-logo.svg";
+import footerLogo from "../sourse/sass/images/svg/footer-logo.svg";
 
 function Footer() {
   return (
     <footer className="footer">
       <a href="./" className="footer__logo" target="_self">
-        <img className="footer__logo-image" src={logo} alt="Логотип Старшие Братья Старшие Сестры России" />
+        <img className="footer__logo-image" src={footerLogo} alt="Логотип Старшие Братья Старшие Сестры России" />
       </a>
       <button className="button footer__button" type="button">Помочь деньгами</button>
       <div className="footer__column footer__column_content_concept">
@@ -23,27 +23,25 @@ function Footer() {
       <nav className="footer__column footer__column_content_info">
         <ul className="footer__column-list">
           <li className="footer__column-links">
-              <NavLink exact to="/about-us" className="footer__column-link" onclick="scroll(0,0)">
-                о проекте
-              </NavLink>
+            <NavLink exact to='/about' className="footer__column-link" target="_self">о проекте</NavLink>
           </li>
           <li className="footer__column-links">
-            <a href="./calendar.html" className="footer__column-link" target="_self">календарь</a>
+            <NavLink exact to="/calendar" className="footer__column-link" target="_self">календарь</NavLink>
           </li>
           <li className="footer__column-links">
-            <a href="./place.html" className="footer__column-link" target="_self">куда пойти</a>
+            <NavLink exact to="/where-to-go" className="footer__column-link" target="_self">куда пойти</NavLink>
           </li>
           <li className="footer__column-links">
-            <a href="./questions.html" className="footer__column-link" target="_self">вопросы</a>
+            <NavLink exact to="/questions" className="footer__column-link" target="_self">вопросы</NavLink>
           </li>
           <li className="footer__column-links">
-            <a href="./read-watch-main.html" className="footer__column-link" target="_self">читать и смотреть</a>
+            <NavLink exact to="/read-and-watch" className="footer__column-link" target="_self">читать и смотреть</NavLink>
           </li>
           <li className="footer__column-links">
-            <a href="./rights.html" className="footer__column-link" target="_self">права детей</a>
+            <NavLink to="/childrens-rights" className="footer__column-link" target="_self">права детей</NavLink>
           </li>
           <li className="footer__column-links">
-            <a href="./stories.html" className="footer__column-link" target="_self">истории</a>
+            <NavLink exact to="/stories" className="footer__column-link" target="_self">истории</NavLink>
           </li>
         </ul>
       </nav>

@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
+import PropTypes from "prop-types";
 
-function Header() {
+function Header({ toggleModal }) {
   const [burgerClick, setBurgerClick] = useState(false)
   const [burgerWrap, setBurgerWrap] = useState(true)
   const [menuListHidden, setMenuListHidden] = useState(true)
@@ -215,6 +216,7 @@ function Header() {
           <li className="menu__button-item">
             <button
               className="menu__button menu__button_type_user"
+              onClick={toggleModal}
               type="button"
               aria-label="Личный кабинет"
               title="Личный кабинет"
@@ -224,6 +226,9 @@ function Header() {
       </nav>
     </header>
   );
+}
+Header.propTypes = {
+  toggleModal: PropTypes.func.isRequired,
 }
 
 export default Header;
