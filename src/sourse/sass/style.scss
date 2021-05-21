@@ -1,6 +1,7 @@
 // Общие настройки и стили
-// @import '../vendor/normalize.css';
-// @import '../vendor/fonts/fonts.css';
+// @import '../../vendor/normalize.css';
+// @import '../../vendor/fonts/fonts.css';
+
 @import './base/variables.scss';
 @import './base/mixins.scss';
 // page
@@ -16,8 +17,8 @@
 @import './blocks/link.scss';
 @import './blocks/caption.scss';
 @import './blocks/rubric.scss';
-// // buttons
-// @import './blocks/button.scss';
+// buttons
+@import './blocks/button.scss';
 // header
 @import './blocks/header.scss';
 // menu
@@ -38,38 +39,38 @@
 @import './blocks/stub.scss';
 @import './blocks/place-card.scss';
 // // calendar
-// @import './blocks/calendar-container.scss';
-// @import './blocks/calendar.scss';
-// @import './blocks/popup.scss';
-// // stories
-// @import './blocks/stories.scss';
-// //place
-// @import './blocks/recommendation.scss';
-// @import './blocks/radio.scss';
+@import './blocks/calendar-container.scss';
+@import './blocks/calendar.scss';
+@import './blocks/popup.scss';
+// stories
+@import './blocks/stories.scss';
+//place
+@import './blocks/recommendation.scss';
+@import './blocks/radio.scss';
 // questions
 @import './blocks/questions.scss';
 @import './blocks/question.scss';
 @import './blocks/add-question.scss';
 @import './blocks/question-form.scss';
 @import './blocks/main-questions.scss';
-// // about
-// @import './blocks/about.scss';
-// // rights
-// @import './blocks/rights.scss';
-// @import './blocks/article-lead.scss';
-// //catalog
-// @import './blocks/catalog-card.scss';
-// // read and watch
-// @import './blocks/preview.scss';
-// // article
-// @import './blocks/article.scss';
-// @import './blocks/next-page.scss';
-// //pagination
-// @import './blocks/pagination.scss';
+// about
+@import './blocks/about.scss';
+// rights
+@import './blocks/rights.scss';
+@import './blocks/article-lead.scss';
+//catalog
+@import './blocks/catalog-card.scss';
+// read and watch
+@import './blocks/preview.scss';
+// article
+@import './blocks/article.scss';
+@import './blocks/next-page.scss';
+//pagination
+@import './blocks/pagination.scss';
 // footer
 @import './blocks/footer.scss';
-// //cities
-// @import './blocks/cities.scss';
-// //
-// @import './blocks/personal.scss';
-// @import './blocks/personal-area';
+//cities
+@import './blocks/cities.scss';
+//
+@import './blocks/personal.scss';
+@import './blocks/personal-area';
