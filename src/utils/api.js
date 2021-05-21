@@ -2,7 +2,7 @@ const axios = require("axios");
 const MockAdapter = require("axios-mock-adapter");
 const mock = new MockAdapter(axios);
 
-export const BASE_URL = "http://127.0.0.1:8000/api/v1";
+const BASE_URL = "http://127.0.0.1:8000/api/v1";
 const headers = {
   Accept: "application/json",
   "Content-Type": "application/json",
