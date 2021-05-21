@@ -1,5 +1,5 @@
 import React from "react";
-import mentorIcon from '../sass/images/svg/calendar_logo.svg';
+import mentorIcon from '../sourse/sass/images/svg/calendar_logo.svg';
 
 function About() {
     return (
@@ -50,7 +50,7 @@ function About() {
                                         ребенком и наставником.</p>
                                 </div>
                             </div>
-                            <a href="#" target="_blank" className="link card__link about__card-link">сделать пожертвование</a>
+                            <a href="https://www.nastavniki.org/campaign/pomoch-dengami/" target="_blank" rel="noreferrer" className="link card__link about__card-link">сделать пожертвование</a>
                         </div>
                     </article>
 
@@ -67,7 +67,7 @@ function About() {
                                         ему надежду на более счастливое и успешное будущее.</p>
                                 </div>
                             </div>
-                            <a href="#" target="_blank" className="link card__link about__card-link">подробнее</a>
+                            <a href="https://www.nastavniki.org" target="_blank" rel="noreferrer" className="link card__link about__card-link">подробнее</a>
                         </div>
                     </article>
 
@@ -84,7 +84,7 @@ function About() {
                                         программы.</p>
                                 </div>
                             </div>
-                            <a href="#" target="_blank" className="link card__link about__card-link">подробнее</a>
+                            <a href="https://www.nastavniki.org" target="_blank" rel="noreferrer" className="link card__link about__card-link">подробнее</a>
                         </div>
                     </article>
                 </div>

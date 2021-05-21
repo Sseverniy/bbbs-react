@@ -2,7 +2,7 @@ import React from 'react';
 
 function Meetup() {
   return (
-    <article className="calendar calendar_selected">
+    <article className="calendar">
       <div className="calendar__caption">
         <div className="calendar__info">
           <p className="calendar__type">Волонтёры + дети</p>
