@@ -6,7 +6,7 @@ import graduatesBBBS from "../sourse/sass/images/video/video-main.jpg"
 
 function Main() {
     return (
-        <div className="page">
+        <>
             <MainSection />
             <WhereToGo />
             <section className="main-section page__section">
@@ -75,7 +75,7 @@ function Main() {
                     <a href="./articles.html" className="link card__link">читать статью</a>
                 </article>
             </section>
-        </div>
+        </>
     );
 }
 

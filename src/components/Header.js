@@ -36,7 +36,7 @@ function Header({ toggleModal }) {
   return (
     <header className={`header ${burgerClick === true ? "heder_displayed" : ""} page__section`}>
       <nav className={`menu ${searchButton === true ? "menu_state_search" : ""}`}>
-        <a href="./index.html" target="_self" className="menu__logo">
+        <a href="./" target="_self" className="menu__logo">
           наставники.про
         </a>
         <div className={`menu__lists-wrap ${burgerWrap === true ? "menu__lists-wrap_hidden" : ""}`}>

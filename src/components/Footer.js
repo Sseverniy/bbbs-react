@@ -1,21 +1,21 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
-import footerLogo from '../sourse/sass/images/svg/calendar_logo.svg';
+import footerLogo from "../sourse/sass/images/svg/footer-logo.svg";
 
 function Footer() {
   return (
     <footer className="footer">
-      <a href="./index.html" className="footer__logo" target="_self">
+      <a href="./" className="footer__logo" target="_self">
         <img className="footer__logo-image" src={footerLogo} alt="Логотип Старшие Братья Старшие Сестры России" />
       </a>
       <button className="button footer__button" type="button">Помочь деньгами</button>
       <div className="footer__column footer__column_content_concept">
         <p className="footer__brand">&copy; Старшие Братья Старшие Сестры</p>
         <div className="footer__copyright">
-          <p className="footer__authors">Разработка – студенты
+          <p className="footer__authors">Разработка – студенты&nbsp;
           <a href="https://praktikum.yandex.ru/" className="footer__production">Яндекс.Практикум</a>
           </p>
-          <p className="footer__design">Концепция и дизайн –
+          <p className="footer__design">Концепция и дизайн –&nbsp;
           <a href="https://krkr.design/" className="footer__production">krkr.design</a>
           </p>
         </div>
@@ -45,7 +45,7 @@ function Footer() {
           </li>
         </ul>
       </nav>
-      <nav classNameName="footer__column footer__column_content_social">
+      <nav className="footer__column footer__column_content_social">
         <ul className="footer__column-list">
           <li className="footer__column-links">
             <a href="https://www.facebook.com/BigBrothers.BigSisters.Russia/" className="footer__column-link">facebook</a>

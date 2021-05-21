@@ -50,7 +50,7 @@ function About() {
                                         ребенком и наставником.</p>
                                 </div>
                             </div>
-                            <a href="123" target="_blank" className="link card__link about__card-link">сделать пожертвование</a>
+                            <a href="https://www.nastavniki.org/campaign/pomoch-dengami/" target="_blank" rel="noreferrer" className="link card__link about__card-link">сделать пожертвование</a>
                         </div>
                     </article>
 
@@ -67,7 +67,7 @@ function About() {
                                         ему надежду на более счастливое и успешное будущее.</p>
                                 </div>
                             </div>
-                            <a href="123" target="_blank" className="link card__link about__card-link">подробнее</a>
+                            <a href="https://www.nastavniki.org" target="_blank" rel="noreferrer" className="link card__link about__card-link">подробнее</a>
                         </div>
                     </article>
 
@@ -84,7 +84,7 @@ function About() {
                                         программы.</p>
                                 </div>
                             </div>
-                            <a href="123" target="_blank" className="link card__link about__card-link">подробнее</a>
+                            <a href="https://www.nastavniki.org" target="_blank" rel="noreferrer" className="link card__link about__card-link">подробнее</a>
                         </div>
                     </article>
                 </div>
