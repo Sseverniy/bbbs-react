@@ -21,7 +21,7 @@ function App() {
 
   function testButton() {
     getListCities().then((res) => {
-      console.log(res.data[1].name)
+      res.data.map((city) =>  console.log(city.name))
     });
   }
 
