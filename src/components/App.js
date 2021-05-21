@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import {
   withRouter,
   Switch,
@@ -9,11 +9,16 @@ import Header from "./Header";
 import Calendar from "./Calendar"
 import About from "./About"
 import Footer from "./Footer"
+import LoginPopup from "./LoginPopup";
 
 function App() {
+  const [isOpen, setIsOpen] = useState(false);
+  function toggleModal() {
+    setIsOpen(!isOpen);
+  }
   return (
     <div className="body">
-      <Header />
+      <Header toggleModal={toggleModal} />
       <Switch>
         <Route exact path="/">
           <Main />
@@ -26,6 +31,7 @@ function App() {
         </Route>
       </Switch>
       <Footer />
+      <LoginPopup toggleModal={toggleModal} isOpen={isOpen}/>
     </div>
   );
 }
