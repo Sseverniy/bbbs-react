@@ -91,7 +91,7 @@ function App() {
       </div>
       <Footer />
       <LoginPopup toggleModal={toggleModalLogin} isOpen={isLoginPopupOpen} />
-      <CitiesPopup toggleModal={toggleModalCities} isOpen={isCitiesPopupOpen} />
+      <CitiesPopup toggleModal={toggleModalCities} isOpen={isCitiesPopupOpen} cities={listOfCities} />
       <CalendarCaptionPopup toggleModal={toggleModalCaption} isOpen={isCaptionPopupOpen} nextPopup={toggleModalConfirm}/>
       <CalendarConfirmPopup toggleModal={toggleModalConfirm} isOpen={isConfirmPopupOpen} nextPopup={toggleModalDone}/>
       <CalendarDonePopup toggleModal={toggleModalDone} isOpen={isDonePopupOpen}/>
