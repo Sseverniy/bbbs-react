@@ -12,7 +12,7 @@ import CalendarCaptionPopup from './CalendarCaptionPopup';
 import CalendarConfirmPopup from './CalendarConfirmPopup';
 import CalendarDonePopup from './CalendarDonePopup';
 import CitiesPopup from './CitiesPopup';
-import { getInfoProfileUsers, authorize } from '../utils/api';
+import { getInfoProfileUsers, authorize, getListCities } from '../utils/api';
 
 function App() {
   // пока захардкодим, чтобы тестировать
@@ -115,7 +115,7 @@ function App() {
         </Switch>
       </div>
       <Footer />
-      <LoginPopup toggleModal={toggleModalLogin} isOpen={isLoginPopupOpen} />
+      <LoginPopup toggleModal={toggleModalLogin} isOpen={isLoginPopupOpen} onLogin={handleLogin}/>
       <CitiesPopup toggleModal={toggleModalCities} isOpen={isCitiesPopupOpen} cities={listOfCities} />
       <CalendarCaptionPopup toggleModal={toggleModalCaption} isOpen={isCaptionPopupOpen} nextPopup={toggleModalConfirm}/>
       <CalendarConfirmPopup toggleModal={toggleModalConfirm} isOpen={isConfirmPopupOpen} nextPopup={toggleModalDone}/>
