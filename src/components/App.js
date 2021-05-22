@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import { withRouter, Switch, Route } from "react-router-dom";
 import ProtectedRoute from "./ProtectedRoute";
 import Main from "./Main";
@@ -13,13 +13,15 @@ import CalendarConfirmPopup from "./CalendarConfirmPopup";
 import CalendarDonePopup from "./CalendarDonePopup";
 import CitiesPopup from "./CitiesPopup";
 
-
 function App() {
   // пока захардкодим, чтобы тестировать
   const loggedIn = true;
-  
+  // eslint-disable-next-line no-unused-vars
+  // const [loggedIn, setLoggedIn] = useState(true);
+
   const [isCitiesPopupOpen, setCitiesPopupOpen] = useState(false);
   const [isLoginPopupOpen, setIsLoginPopupOpen] = useState(false);
+
   function toggleModalCities() {
     setCitiesPopupOpen(!isCitiesPopupOpen);
   }
@@ -29,11 +31,11 @@ function App() {
 
   return (
     <>
-      <Header toggleModal={toggleModalLogin} />
+      <Header toggleModal={toggleModalLogin} loggedIn={loggedIn} />
       <div className="main">
         <Switch>
           <Route exact path="/">
-            <Main />
+            <Main loggedIn={loggedIn} />
           </Route>
           <Route exact path="/calendar">
             <Calendar />
@@ -44,17 +46,12 @@ function App() {
           <Route exact path="/about">
             <About />
           </Route>
-          <ProtectedRoute
-            exact
-            path="/profile"
-            loggedIn={loggedIn}
-            component={PersonalArea}
-          />
+          <ProtectedRoute exact path="/profile" loggedIn={loggedIn} component={PersonalArea} />
         </Switch>
       </div>
       <Footer />
-      <LoginPopup toggleModal={toggleModalLogin} isOpen={isLoginPopupOpen}/>
-      <CitiesPopup toggleModal={toggleModalCities} isOpen={isCitiesPopupOpen}/>
+      <LoginPopup toggleModal={toggleModalLogin} isOpen={isLoginPopupOpen} />
+      <CitiesPopup toggleModal={toggleModalCities} isOpen={isCitiesPopupOpen} />
     </>
   );
 }

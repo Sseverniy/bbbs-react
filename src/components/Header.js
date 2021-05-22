@@ -2,43 +2,43 @@ import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
 import PropTypes from "prop-types";
 
-function Header({ toggleModal }) {
-  const [burgerClick, setBurgerClick] = useState(false)
-  const [burgerWrap, setBurgerWrap] = useState(true)
-  const [menuListHidden, setMenuListHidden] = useState(true)
-  const [searchButton, setSearchButton] = useState(false)
+function Header({ toggleModal, loggedIn }) {
+  const [burgerClick, setBurgerClick] = useState(false);
+  const [burgerWrap, setBurgerWrap] = useState(true);
+  const [menuListHidden, setMenuListHidden] = useState(true);
+  const [searchButton, setSearchButton] = useState(false);
 
   const hendleBurgerClick = () => {
     if (burgerClick === true) {
-      setBurgerClick(false)
-      setBurgerWrap(true)
-      setMenuListHidden(true)
+      setBurgerClick(false);
+      setBurgerWrap(true);
+      setMenuListHidden(true);
     } else {
-      setBurgerClick(true)
-      setBurgerWrap(false)
-      setMenuListHidden(false)
-      setSearchButton(false)
+      setBurgerClick(true);
+      setBurgerWrap(false);
+      setMenuListHidden(false);
+      setSearchButton(false);
     }
-  }
+  };
 
   const hendleSearchButton = (e) => {
     e.preventDefault();
     if (searchButton === true) {
-      setSearchButton(false)
+      setSearchButton(false);
     } else {
-      setSearchButton(true)
-      setBurgerClick(false)
-      setBurgerWrap(true)
-      setMenuListHidden(true)
+      setSearchButton(true);
+      setBurgerClick(false);
+      setBurgerWrap(true);
+      setMenuListHidden(true);
     }
-  }
-  console.log(burgerClick);
+  };
+
   return (
     <header className={`header ${burgerClick === true ? "heder_displayed" : ""} page__section`}>
       <nav className={`menu ${searchButton === true ? "menu_state_search" : ""}`}>
-        <a href="./" target="_self" className="menu__logo">
+        <NavLink exact to="/" target="_self" className="menu__logo">
           наставники.про
-        </a>
+        </NavLink>
         <div className={`menu__lists-wrap ${burgerWrap === true ? "menu__lists-wrap_hidden" : ""}`}>
           <ul className="menu__list">
             <li className="menu__list-item">
@@ -72,10 +72,7 @@ function Header({ toggleModal }) {
                   </NavLink>
                 </li>
                 <li className="menu__dropdown-list-item">
-                  <NavLink
-                    exact to="/articles"
-                    className="link menu__dropdown-link"
-                  >
+                  <NavLink exact to="/articles" className="link menu__dropdown-link">
                     Статьи
                   </NavLink>
                 </li>
@@ -105,41 +102,29 @@ function Header({ toggleModal }) {
 
           <ul className={`menu__list menu__list_type_social ${menuListHidden === true ? "menu__list_hidden" : ""}`}>
             <li className="menu__list-item">
-              <a
-                href="https://www.facebook.com/BigBrothers.BigSisters.Russia/"
-                className="menu__link"
-              >
+              <a href="https://www.facebook.com/BigBrothers.BigSisters.Russia/" className="menu__link">
                 facebook
               </a>
             </li>
             <li className="menu__list-item">
-              <a
-                href="https://vk.com/big.brothers.big.sisters"
-                className="menu__link"
-              >
+              <a href="https://vk.com/big.brothers.big.sisters" className="menu__link">
                 vkontakte
               </a>
             </li>
             <li className="menu__list-item">
-              <a
-                href="https://www.instagram.com/nastavniki_org/"
-                className="menu__link"
-              >
+              <a href="https://www.instagram.com/nastavniki_org/" className="menu__link">
                 instagram
               </a>
             </li>
             <li className="menu__list-item">
-              <a
-                href="https://www.youtube.com/user/Nastavniki/"
-                className="menu__link"
-              >
+              <a href="https://www.youtube.com/user/Nastavniki/" className="menu__link">
                 youtube
               </a>
             </li>
           </ul>
         </div>
 
-        <button className={`menu__burger ${burgerClick === true ? "menu__burger_active" : ""}`} type="button" onClick={hendleBurgerClick} >
+        <button className={`menu__burger ${burgerClick === true ? "menu__burger_active" : ""}`} type="button" onClick={hendleBurgerClick}>
           <span className="menu__burger-line" />
           <span className="menu__burger-line" />
           <span className="menu__burger-line" />
@@ -156,19 +141,10 @@ function Header({ toggleModal }) {
                 onClick={hendleSearchButton}
               />
               <div className={`search__options menu__search-options ${searchButton === true ? "search__options_visible" : ""}`}>
-                <input
-                  type="text"
-                  name="search"
-                  placeholder="Поиск"
-                  value=""
-                  className="search__input paragraph"
-                />
+                <input type="text" name="search" placeholder="Поиск" className="search__input paragraph" />
                 <ul className="search__option-list">
                   <li className="search__option-item">
-                    <a
-                      href="./article.html"
-                      className="search__title-link section-title section-title_clickable"
-                    >
+                    <a href="./article.html" className="search__title-link section-title section-title_clickable">
                       Причины подростковой агрессии
                     </a>
                     <a href="./article.html" className="link search__link">
@@ -176,10 +152,7 @@ function Header({ toggleModal }) {
                     </a>
                   </li>
                   <li className="search__option-item">
-                    <a
-                      href="./video.html"
-                      className="search__title-link section-title section-title_clickable"
-                    >
+                    <a href="./video.html" className="search__title-link section-title section-title_clickable">
                       Агрессивное поведение детей-сирот
                     </a>
                     <a href="./video.html" className="link search__link">
@@ -187,22 +160,15 @@ function Header({ toggleModal }) {
                     </a>
                   </li>
                   <li className="search__option-item">
-                    <a
-                      href="./questions.html"
-                      className="search__title-link section-title section-title_clickable"
-                    >
-                      Что делать если ваш младший агрессивно себя ведет, решил
-                      закрыть пару?
+                    <a href="./questions.html" className="search__title-link section-title section-title_clickable">
+                      Что делать если ваш младший агрессивно себя ведет, решил закрыть пару?
                     </a>
                     <a href="./questions.html" className="link search__link">
                       вопросы
                     </a>
                   </li>
                   <li className="search__option-item">
-                    <a
-                      href="./books.html"
-                      className="search__title-link section-title section-title_clickable"
-                    >
+                    <a href="./books.html" className="search__title-link section-title section-title_clickable">
                       Как реагировать на агрессивное поведения ребенка
                     </a>
                     <a href="./books.html" className="link search__link">
@@ -215,7 +181,7 @@ function Header({ toggleModal }) {
           </li>
           <li className="menu__button-item">
             <button
-              className="menu__button menu__button_type_user"
+              className={`menu__button ${loggedIn === true ? "menu__button_type_active-user" : " menu__button_type_user"}`}
               onClick={toggleModal}
               type="button"
               aria-label="Личный кабинет"
@@ -229,6 +195,7 @@ function Header({ toggleModal }) {
 }
 Header.propTypes = {
   toggleModal: PropTypes.func.isRequired,
-}
+  loggedIn: PropTypes.bool.isRequired,
+};
 
 export default Header;
