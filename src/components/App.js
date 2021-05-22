@@ -8,10 +8,12 @@ import Footer from "./Footer";
 import About from "./About";
 import PersonalArea from "./PersonalArea";
 import LoginPopup from "./LoginPopup";
+import { getListCities } from "../utils/api";
 import CalendarCaptionPopup from "./CalendarCaptionPopup";
 import CalendarConfirmPopup from "./CalendarConfirmPopup";
 import CalendarDonePopup from "./CalendarDonePopup";
 import CitiesPopup from "./CitiesPopup";
+
 
 function App() {
   // пока захардкодим, чтобы тестировать
@@ -27,12 +29,21 @@ function App() {
   }
   function toggleModalLogin() {
     setIsLoginPopupOpen(!isLoginPopupOpen);
+
+  }
+
+  function testButton() {
+    getListCities().then(({data}) => {
+      data.map((city) =>  console.log(city.name))
+    })
+    .catch((err) => {console.log(`Ошибка: ${err}`)})
   }
 
   return (
     <>
       <Header toggleModal={toggleModalLogin} loggedIn={loggedIn} />
       <div className="main">
+      <button style={{background: "red"}} type="button" onClick={testButton}>ЭТО КНОПКА</button>
         <Switch>
           <Route exact path="/">
             <Main loggedIn={loggedIn} />
