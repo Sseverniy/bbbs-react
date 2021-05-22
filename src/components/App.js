@@ -9,14 +9,27 @@ import About from "./About";
 import PersonalArea from "./PersonalArea";
 import LoginPopup from "./LoginPopup";
 import { getListCities } from "../utils/api";
+import CalendarCaptionPopup from "./CalendarCaptionPopup";
+import CalendarConfirmPopup from "./CalendarConfirmPopup";
+import CalendarDonePopup from "./CalendarDonePopup";
+import CitiesPopup from "./CitiesPopup";
+
 
 function App() {
   // пока захардкодим, чтобы тестировать
   const loggedIn = true;
+  // eslint-disable-next-line no-unused-vars
+  // const [loggedIn, setLoggedIn] = useState(true);
 
-  const [isOpen, setIsOpen] = useState(false);
-  function toggleModal() {
-    setIsOpen(!isOpen);
+  const [isCitiesPopupOpen, setCitiesPopupOpen] = useState(false);
+  const [isLoginPopupOpen, setIsLoginPopupOpen] = useState(false);
+
+  function toggleModalCities() {
+    setCitiesPopupOpen(!isCitiesPopupOpen);
+  }
+  function toggleModalLogin() {
+    setIsLoginPopupOpen(!isLoginPopupOpen);
+
   }
 
   function testButton() {
@@ -28,29 +41,28 @@ function App() {
 
   return (
     <>
-      <Header toggleModal={toggleModal} />
+      <Header toggleModal={toggleModalLogin} loggedIn={loggedIn} />
       <div className="main">
       <button style={{background: "red"}} type="button" onClick={testButton}>ЭТО КНОПКА</button>
         <Switch>
           <Route exact path="/">
-            <Main />
+            <Main loggedIn={loggedIn} />
           </Route>
           <Route exact path="/calendar">
             <Calendar />
+            <CalendarCaptionPopup />
+            <CalendarConfirmPopup />
+            <CalendarDonePopup />
           </Route>
           <Route exact path="/about">
             <About />
           </Route>
-          <ProtectedRoute
-            exact
-            path="/profile"
-            loggedIn={loggedIn}
-            component={PersonalArea}
-          />
+          <ProtectedRoute exact path="/profile" loggedIn={loggedIn} component={PersonalArea} />
         </Switch>
       </div>
       <Footer />
-      <LoginPopup toggleModal={toggleModal} isOpen={isOpen} />
+      <LoginPopup toggleModal={toggleModalLogin} isOpen={isLoginPopupOpen} />
+      <CitiesPopup toggleModal={toggleModalCities} isOpen={isCitiesPopupOpen} />
     </>
   );
 }
