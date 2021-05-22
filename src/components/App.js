@@ -21,12 +21,30 @@ function App() {
 
   const [isCitiesPopupOpen, setCitiesPopupOpen] = useState(false);
   const [isLoginPopupOpen, setIsLoginPopupOpen] = useState(false);
+  const [isCaptionPopupOpen, setIsCaptionPopupOpen] = useState(false);
+  const [isConfirmPopupOpen, setIsConfirmPopupOpen] = useState(false);
+  const [isDonePopupOpen, setIsDonePopupOpen] = useState(false);
 
   function toggleModalCities() {
     setCitiesPopupOpen(!isCitiesPopupOpen);
   }
   function toggleModalLogin() {
     setIsLoginPopupOpen(!isLoginPopupOpen);
+  }
+  function toggleModalCaption() {
+    setIsCaptionPopupOpen(!isCaptionPopupOpen);
+  }
+  function toggleModalConfirm() {
+    if (isCaptionPopupOpen) {
+      toggleModalCaption();
+    }
+    setIsConfirmPopupOpen(!isConfirmPopupOpen);
+  }
+  function toggleModalDone() {
+    if (isConfirmPopupOpen) {
+      toggleModalConfirm();
+    }
+    setIsDonePopupOpen(!isDonePopupOpen);
   }
 
   return (
@@ -38,10 +56,7 @@ function App() {
             <Main loggedIn={loggedIn} />
           </Route>
           <Route exact path="/calendar">
-            <Calendar />
-            <CalendarCaptionPopup />
-            <CalendarConfirmPopup />
-            <CalendarDonePopup />
+            <Calendar toggleModal={toggleModalCaption} />
           </Route>
           <Route exact path="/about">
             <About />
@@ -52,6 +67,9 @@ function App() {
       <Footer />
       <LoginPopup toggleModal={toggleModalLogin} isOpen={isLoginPopupOpen} />
       <CitiesPopup toggleModal={toggleModalCities} isOpen={isCitiesPopupOpen} />
+      <CalendarCaptionPopup toggleModal={toggleModalCaption} isOpen={isCaptionPopupOpen} nextPopup={toggleModalConfirm}/>
+      <CalendarConfirmPopup toggleModal={toggleModalConfirm} isOpen={isConfirmPopupOpen} nextPopup={toggleModalDone}/>
+      <CalendarDonePopup toggleModal={toggleModalDone} isOpen={isDonePopupOpen}/>
     </>
   );
 }
