@@ -68,6 +68,7 @@ function Main({ loggedIn }) {
           <div className="card card_color_yellow card_content_video video">
             <a href="./video.html" className="card__link-wrap">
               <img src={graduatesBBBS} alt="Превью видео" className="video__img video__img_position_main-video" />
+              <p className="video__duration video__duration_position_main-video paragraph">59:44</p>
             </a>
           </div>
         </article>
