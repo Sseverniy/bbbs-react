@@ -73,7 +73,7 @@ function App() {
 
   return (
     <>
-      <Header toggleModal={toggleModalCities} loggedIn={loggedIn} />
+      <Header toggleModal={toggleModalLogin} loggedIn={loggedIn} />
       <div className="main">
       <button style={{background: "red"}} type="button" onClick={testButton}>ЭТО КНОПКА</button>
         <Switch>
