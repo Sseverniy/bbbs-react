@@ -4,8 +4,7 @@ import PropTypes from "prop-types";
 
 Modal.setAppElement('#root')
 
-function CitiesPopup({ isOpen, toggleModal }) {
-
+function CitiesPopup({ isOpen, toggleModal, cities }) {
     return (
         <>
             <Modal
@@ -18,33 +17,26 @@ function CitiesPopup({ isOpen, toggleModal }) {
             >
                 <h2 className="cities__title section-title">Выберите ваш город</h2>
                 <ul className="cities__capitals">
-                    <li className="cities__name"><a href="/#" target="_self" className="cities__link">Москва</a></li>
-                    <li className="cities__name"><a href="/#" target="_self" className="cities__link">Санкт-Петербург</a>
-                    </li>
+                  {cities.filter((item) =>  item.isPrimary).map((item) => <li className="cities__name" key={item.id}><a href="/#" target="_self" onClick={toggleModal} className="cities__link">{item.name}</a></li>
+                  )}
                 </ul>
                 <ul className="cities__region">
-                    <li className="cities__name"><a href="/#" target="_self" className="cities__link">Алексин</a></li>
-                    <li className="cities__name"><a href="/#" target="_self" className="cities__link">Барнаул</a></li>
-                    <li className="cities__name"><a href="/#" target="_self" className="cities__link">Екатеринбург</a>
-                    </li>
-                    <li className="cities__name"><a href="/#" target="_self" className="cities__link">Зубцов</a></li>
-                    <li className="cities__name"><a href="/#" target="_self" className="cities__link">Калининград</a>
-                    </li>
-                    <li className="cities__name"><a href="/#" target="_self" className="cities__link">Киреевск</a></li>
-                    <li className="cities__name"><a href="/#" target="_self" className="cities__link">Коломна</a></li>
-                    <li className="cities__name"><a href="/#" target="_self" className="cities__link">Новомосковск</a>
-                    </li>
-                    <li className="cities__name"><a href="/#" target="_self" className="cities__link">Орехово-Зуево</a>
-                    </li>
-                    <li className="cities__name"><a href="/#" target="_self" className="cities__link">Тверь</a></li>
-                    <li className="cities__name"><a href="/#" target="_self" className="cities__link">Тула</a></li>
+                  {cities.filter((item) =>  !item.isPrimary).map((item) => <li className="cities__name" key={item.id}><a href="/#" target="_self" onClick={toggleModal}className="cities__link">{item.name}</a></li>
+                  )}
                 </ul>
             </Modal>
         </>
     );
 }
 CitiesPopup.propTypes = {
-    isOpen: PropTypes.bool.isRequired,
-    toggleModal: PropTypes.func.isRequired,
+  isOpen: PropTypes.bool.isRequired,
+  toggleModal: PropTypes.func.isRequired,
+  cities: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.number,
+      name: PropTypes.string,
+      isPrimary: PropTypes.bool
+    })
+  ).isRequired
 }
 export default CitiesPopup;
