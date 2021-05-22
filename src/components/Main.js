@@ -23,8 +23,8 @@ function Main({ loggedIn }) {
               </div>
               <div className="stub__content">
                 <h2 className="section-title stub__text">
-                  Наставники.про – цифоровая информационная платформа огрганизации «Старшие Братья Старшие Сестры». Созданная для поддержки
-                  наставников программы.
+                  Наставники.про – цифоровая информационная платформа огрганизации «Старшие Братья Старшие Сестры».
+                  Созданная для поддержки наставников программы.
                 </h2>
               </div>
             </article>
@@ -42,8 +42,8 @@ function Main({ loggedIn }) {
         <article className="card card_color_blue card_content_quote">
           <a href="./articles.html" className="card__link-wrap">
             <h3 className="chapter-title card__quote">
-              Развитие детей-сирот отличается от развития детей, живущих в семьях. Все этапы развития у детей-сирот проходят с искажениями и имеют ряд
-              негативных особенностей.
+              Развитие детей-сирот отличается от развития детей, живущих в семьях. Все этапы развития у детей-сирот
+              проходят с искажениями и имеют ряд негативных особенностей.
             </h3>
           </a>
           <a href="./articles.html" className="link card__link">
@@ -121,8 +121,8 @@ function Main({ loggedIn }) {
         <article className="card card_color_green card_content_quote">
           <a href="./articles.html" className="card__link-wrap">
             <h3 className="chapter-title card__quote">
-              У таких детей возникает ощущение отверженности. Оно приводит к напряженности и недоверию к людям и, как итог, к реальному неприятию себя
-              и окружающих.
+              У таких детей возникает ощущение отверженности. Оно приводит к напряженности и недоверию к людям и, как
+              итог, к реальному неприятию себя и окружающих.
             </h3>
           </a>
           <a href="./articles.html" className="link card__link">
