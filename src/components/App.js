@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { withRouter, Switch, Route } from "react-router-dom";
 import ProtectedRoute from "./ProtectedRoute";
 import Main from "./Main";
@@ -23,6 +23,7 @@ function App() {
 
   const [isCitiesPopupOpen, setCitiesPopupOpen] = useState(false);
   const [isLoginPopupOpen, setIsLoginPopupOpen] = useState(false);
+  const [listOfCities, setListOfCities] = useState([]);
 
   function toggleModalCities() {
     setCitiesPopupOpen(!isCitiesPopupOpen);
@@ -38,6 +39,14 @@ function App() {
     })
     .catch((err) => {console.log(`Ошибка: ${err}`)})
   }
+  useEffect(() => {
+    getListCities().then((data) => {
+      setListOfCities(data.data);
+    })
+      .catch(() => {
+        console.log('Ошибка загрузки городов')
+      })
+  },[])
 
   return (
     <>
@@ -62,7 +71,7 @@ function App() {
       </div>
       <Footer />
       <LoginPopup toggleModal={toggleModalLogin} isOpen={isLoginPopupOpen} />
-      <CitiesPopup toggleModal={toggleModalCities} isOpen={isCitiesPopupOpen} />
+      <CitiesPopup toggleModal={toggleModalCities} cities={listOfCities} isOpen={isCitiesPopupOpen} />
     </>
   );
 }

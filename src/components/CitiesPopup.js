@@ -4,35 +4,7 @@ import PropTypes from "prop-types";
 
 Modal.setAppElement('#root')
 
-function CitiesPopup({ isOpen, toggleModal }) {
-  // Пока для теста захардкодил города
- const lk = [
-    {
-      id: 1,
-      name: "Москва",
-      isPrimary: true,
-    },
-    {
-      id: 2,
-      name: "Воронеж",
-      isPrimary: false,
-    },
-   {
-     id: 3,
-     name: "Саратов",
-     isPrimary: false,
-   },
-   {
-     id: 4,
-     name: "Омск",
-     isPrimary: false,
-   },
-   {
-     id: 2,
-     name: "Краснодар",
-     isPrimary: false,
-   },
-  ]
+function CitiesPopup({ isOpen, toggleModal, cities }) {
     return (
         <>
             <Modal
@@ -45,11 +17,11 @@ function CitiesPopup({ isOpen, toggleModal }) {
             >
                 <h2 className="cities__title section-title">Выберите ваш город</h2>
                 <ul className="cities__capitals">
-                  {lk.filter((item) =>  item.isPrimary).map((item) => <li className="cities__name"><a href="/#" target="_self" onClick={toggleModal} className="cities__link">{item.name}</a></li>
+                  {cities.filter((item) =>  item.isPrimary).map((item) => <li className="cities__name" key={item.id}><a href="/#" target="_self" onClick={toggleModal} className="cities__link">{item.name}</a></li>
                   )}
                 </ul>
                 <ul className="cities__region">
-                  {lk.filter((item) =>  !item.isPrimary).map((item) => <li className="cities__name"><a href="/#" target="_self" onClick={toggleModal}className="cities__link">{item.name}</a></li>
+                  {cities.filter((item) =>  !item.isPrimary).map((item) => <li className="cities__name" key={item.id}><a href="/#" target="_self" onClick={toggleModal}className="cities__link">{item.name}</a></li>
                   )}
                 </ul>
             </Modal>
@@ -57,7 +29,14 @@ function CitiesPopup({ isOpen, toggleModal }) {
     );
 }
 CitiesPopup.propTypes = {
-    isOpen: PropTypes.bool.isRequired,
-    toggleModal: PropTypes.func.isRequired,
+  isOpen: PropTypes.bool.isRequired,
+  toggleModal: PropTypes.func.isRequired,
+  cities: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.number,
+      name: PropTypes.string,
+      isPrimary: PropTypes.bool
+    })
+  ).isRequired
 }
 export default CitiesPopup;
