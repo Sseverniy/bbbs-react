@@ -142,6 +142,8 @@ function App() {
               movies={moviesMain}
               questions={questionsMain}
               articles={articlesMain}
+              toggleModal={toggleModalCaption}
+              event={listOfEvents[0]}
             />
           </Route>
           <Route exact path='/calendar'>
