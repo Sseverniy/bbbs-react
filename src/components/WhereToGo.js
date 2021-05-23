@@ -36,16 +36,14 @@ function WhereToGo({ place }) {
   );
 }
 WhereToGo.propTypes = {
-  place: PropTypes.objectOf(
-    PropTypes.shape({
-      description: PropTypes.string,
-      id: PropTypes.number,
-      imageUrl: PropTypes.string,
-      info: PropTypes.string,
-      link: PropTypes.string,
-      title: PropTypes.string,
-      name: PropTypes.string,
-    })
-  ).isRequired,
+  place: PropTypes.shape({
+    description: PropTypes.string,
+    id: PropTypes.number,
+    imageUrl: PropTypes.string,
+    info: PropTypes.string,
+    link: PropTypes.string,
+    title: PropTypes.string,
+    name: PropTypes.string,
+  }).isRequired,
 };
 export default WhereToGo;
