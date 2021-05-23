@@ -25,13 +25,16 @@ function Main({ loggedIn, history, place, video, movies, questions, articles }) 
     <>
       <Helmet>
         <title>Старшие Братья Старшие Сёстры</title>
-        <meta name="description" content="«Старшие Братья Старшие Сестры» — межрегиональная общественная организация содействия воспитанию подрастающего поколения.
+        <meta
+          name='description'
+          content='«Старшие Братья Старшие Сестры» — межрегиональная общественная организация содействия воспитанию подрастающего поколения.
         НКО поддерживает детей, которым требуется внимание: оставшихся без попечения родителей, приемных, детей из неполных, многодетных или неблагополучных семей,
-        детей с ограниченными возможностями."/>
-        <meta name="keywords" content="Дети"/>
+        детей с ограниченными возможностями.'
+        />
+        <meta name='keywords' content='Дети' />
       </Helmet>
-      <section className="lead page__section">
-        <article className="card-container card-container_type_identical">
+      <section className='lead page__section'>
+        <article className='card-container card-container_type_identical'>
           {loggedIn === true ? (
             <Meetup />
           ) : (
@@ -145,28 +148,22 @@ function Main({ loggedIn, history, place, video, movies, questions, articles }) 
 
 Main.propTypes = {
   loggedIn: PropTypes.bool.isRequired,
-  history: PropTypes.objectOf(
-    PropTypes.shape({
-      id: PropTypes.number,
-      imageUrl: PropTypes.string,
-      title: PropTypes.string,
-    })
-  ).isRequired,
-  place: PropTypes.objectOf(
-    PropTypes.shape({
-      chosen: PropTypes.bool,
-    })
-  ).isRequired,
-  video: PropTypes.objectOf(
-    PropTypes.shape({
-      id: PropTypes.number,
-      duration: PropTypes.number,
-      imageUrl: PropTypes.string,
-      info: PropTypes.string,
-      link: PropTypes.string,
-      title: PropTypes.string,
-    })
-  ).isRequired,
+  history: PropTypes.shape({
+    id: PropTypes.number,
+    imageUrl: PropTypes.string,
+    title: PropTypes.string,
+  }).isRequired,
+  place: PropTypes.shape({
+    chosen: PropTypes.bool,
+  }).isRequired,
+  video: PropTypes.shape({
+    id: PropTypes.number,
+    duration: PropTypes.number,
+    imageUrl: PropTypes.string,
+    info: PropTypes.string,
+    link: PropTypes.string,
+    title: PropTypes.string,
+  }).isRequired,
   movies: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
   questions: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
   articles: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
