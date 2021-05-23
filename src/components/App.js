@@ -12,7 +12,7 @@ import CalendarCaptionPopup from './CalendarCaptionPopup';
 import CalendarConfirmPopup from './CalendarConfirmPopup';
 import CalendarDonePopup from './CalendarDonePopup';
 import CitiesPopup from './CitiesPopup';
-import { getInfoProfileUsers, authorize, getListCities } from '../utils/api';
+import { getInfoProfileUsers, authorize, getListCities, getHomePage } from '../utils/api';
 
 function App() {
   // пока захардкодим, чтобы тестировать
@@ -23,12 +23,19 @@ function App() {
   const [loggedIn, setLoggedIn] = useState(false);
   const [isCitiesPopupOpen, setCitiesPopupOpen] = useState(false);
   const [isLoginPopupOpen, setIsLoginPopupOpen] = useState(false);
-
+  // попапы календаря
   const [isCaptionPopupOpen, setIsCaptionPopupOpen] = useState(false);
   const [isConfirmPopupOpen, setIsConfirmPopupOpen] = useState(false);
   const [isDonePopupOpen, setIsDonePopupOpen] = useState(false);
 
   const [listOfCities, setListOfCities] = useState([]);
+  // стейты главной страницы
+  const [historyMain, setHistoryMain] = useState({});
+  const [placeMain, setPlaceMain] = useState({});
+  const [videoMain, setVideoMain] = useState({});
+  const [moviesMain, setMoviesMain] = useState([]);
+  const [questionsMain, setQuestionsMain] = useState([]);
+  const [articlesMain, setArticlesMain] = useState([]);
 
   function toggleModalCities() {
     setCitiesPopupOpen(!isCitiesPopupOpen);
@@ -80,6 +87,18 @@ function App() {
       });
   };
 
+  const handleGetMain = () => {
+    getHomePage().then((data) => {
+      console.log(data);
+      setHistoryMain(data.data.history);
+      setPlaceMain(data.data.place);
+      setVideoMain(data.data.video);
+      setMoviesMain(data.data.movies);
+      setQuestionsMain(data.data.questions);
+      setArticlesMain(data.data.articles);
+    });
+  };
+
   useEffect(() => {
     const access = localStorage.getItem('access');
     if (access) {
@@ -98,10 +117,7 @@ function App() {
   }, []);
 
   useEffect(() => {
-    const access = localStorage.getItem('access');
-    if (access) {
-      handleTokenCheck(access);
-    }
+    handleGetMain();
   }, []);
 
   return (
@@ -110,7 +126,15 @@ function App() {
       <div className='main'>
         <Switch>
           <Route exact path='/'>
-            <Main loggedIn={loggedIn} />
+            <Main
+              loggedIn={loggedIn}
+              history={historyMain}
+              place={placeMain}
+              video={videoMain}
+              movies={moviesMain}
+              questions={questionsMain}
+              articles={articlesMain}
+            />
           </Route>
           <Route exact path='/calendar'>
             <Calendar toggleModal={toggleModalCaption} />

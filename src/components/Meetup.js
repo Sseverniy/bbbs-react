@@ -1,6 +1,6 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
-// eslint-disable-next-line react/prop-types
 function Meetup({ toggleModal }) {
   return (
     <article className='calendar'>
@@ -43,5 +43,9 @@ function Meetup({ toggleModal }) {
     </article>
   );
 }
+
+Meetup.propTypes = {
+  toggleModal: PropTypes.func.isRequired,
+};
 
 export default Meetup;

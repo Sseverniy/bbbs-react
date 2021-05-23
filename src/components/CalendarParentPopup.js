@@ -3,7 +3,7 @@ import Modal from 'react-modal';
 import PropTypes from 'prop-types';
 
 Modal.setAppElement('#root');
-// eslint-disable-next-line react/prop-types
+
 function CalendarParentPopup({ children, isOpen, toggleModal }) {
   return (
     <Modal
@@ -24,6 +24,7 @@ function CalendarParentPopup({ children, isOpen, toggleModal }) {
 CalendarParentPopup.propTypes = {
   isOpen: PropTypes.bool.isRequired,
   toggleModal: PropTypes.func.isRequired,
+  children: PropTypes.element.isRequired,
 };
 
 export default CalendarParentPopup;
