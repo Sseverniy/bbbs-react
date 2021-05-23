@@ -28,8 +28,8 @@ function Meetup({ toggleModal }) {
         </ul>
         <div className='calendar__submit'>
           <button
-            className="button button_theme_light calendar__button calendar__button_selected calendar__button_action_sign-up"
-            type="button"
+            className='button button_theme_light calendar__button calendar__button_selected calendar__button_action_sign-up'
+            type='button'
             onClick={toggleModal}
           >
             Записаться

@@ -30,7 +30,6 @@ function App() {
 
   const [listOfCities, setListOfCities] = useState([]);
 
-
   function toggleModalCities() {
     setCitiesPopupOpen(!isCitiesPopupOpen);
   }
@@ -89,13 +88,21 @@ function App() {
   }, []);
 
   useEffect(() => {
-    getListCities().then((data) => {
-      setListOfCities(data.data);
-    })
-      .catch(() => {
-        console.log('Ошибка загрузки городов')
+    getListCities()
+      .then((data) => {
+        setListOfCities(data.data);
       })
-  },[])
+      .catch(() => {
+        console.log('Ошибка загрузки городов');
+      });
+  }, []);
+
+  useEffect(() => {
+    const access = localStorage.getItem('access');
+    if (access) {
+      handleTokenCheck(access);
+    }
+  }, []);
 
   return (
     <>
@@ -105,7 +112,7 @@ function App() {
           <Route exact path='/'>
             <Main loggedIn={loggedIn} />
           </Route>
-          <Route exact path="/calendar">
+          <Route exact path='/calendar'>
             <Calendar toggleModal={toggleModalCaption} />
           </Route>
           <Route exact path='/about'>
@@ -115,11 +122,15 @@ function App() {
         </Switch>
       </div>
       <Footer />
-      <LoginPopup toggleModal={toggleModalLogin} isOpen={isLoginPopupOpen} onLogin={handleLogin}/>
+      <LoginPopup toggleModal={toggleModalLogin} isOpen={isLoginPopupOpen} onLogin={handleLogin} />
       <CitiesPopup toggleModal={toggleModalCities} isOpen={isCitiesPopupOpen} cities={listOfCities} />
-      <CalendarCaptionPopup toggleModal={toggleModalCaption} isOpen={isCaptionPopupOpen} nextPopup={toggleModalConfirm}/>
-      <CalendarConfirmPopup toggleModal={toggleModalConfirm} isOpen={isConfirmPopupOpen} nextPopup={toggleModalDone}/>
-      <CalendarDonePopup toggleModal={toggleModalDone} isOpen={isDonePopupOpen}/>
+      <CalendarCaptionPopup
+        toggleModal={toggleModalCaption}
+        isOpen={isCaptionPopupOpen}
+        nextPopup={toggleModalConfirm}
+      />
+      <CalendarConfirmPopup toggleModal={toggleModalConfirm} isOpen={isConfirmPopupOpen} nextPopup={toggleModalDone} />
+      <CalendarDonePopup toggleModal={toggleModalDone} isOpen={isDonePopupOpen} />
       <CitiesPopup toggleModal={toggleModalCities} cities={listOfCities} isOpen={isCitiesPopupOpen} />
     </>
   );

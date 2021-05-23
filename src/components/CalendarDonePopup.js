@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import CalendarParentPopup from './CalendarParentPopup';
 
-// eslint-disable-next-line react/prop-types
 function CalendarDonePopup({ isOpen, toggleModal }) {
   return (
     <CalendarParentPopup isOpen={isOpen} toggleModal={toggleModal}>
@@ -22,7 +21,7 @@ function CalendarDonePopup({ isOpen, toggleModal }) {
   );
 }
 
-CalendarParentPopup.propTypes = {
+CalendarDonePopup.propTypes = {
   isOpen: PropTypes.bool.isRequired,
   toggleModal: PropTypes.func.isRequired,
 };

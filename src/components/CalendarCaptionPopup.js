@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import CalendarParentPopup from './CalendarParentPopup';
 
-// eslint-disable-next-line react/prop-types
 function CalendarCaptionPopup({ isOpen, toggleModal, nextPopup }) {
   return (
     <CalendarParentPopup isOpen={isOpen} toggleModal={toggleModal}>
@@ -40,7 +39,7 @@ function CalendarCaptionPopup({ isOpen, toggleModal, nextPopup }) {
             </p>
           </div>
           <div className='calendar__submit'>
-            <button className='button button_theme_light button_action_confirm' type='button' onClick={nextPopup} >
+            <button className='button button_theme_light button_action_confirm' type='button' onClick={nextPopup}>
               Записаться
             </button>
             <p className='calendar__place-left'>Осталось 5 мест</p>
@@ -51,9 +50,10 @@ function CalendarCaptionPopup({ isOpen, toggleModal, nextPopup }) {
   );
 }
 
-CalendarParentPopup.propTypes = {
+CalendarCaptionPopup.propTypes = {
   isOpen: PropTypes.bool.isRequired,
   toggleModal: PropTypes.func.isRequired,
+  nextPopup: PropTypes.func.isRequired,
 };
 
 export default CalendarCaptionPopup;
