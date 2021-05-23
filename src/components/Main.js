@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { Helmet } from 'react-helmet';
 import WhereToGo from "./WhereToGo";
 import Films from "./Films";
 import Meetup from "./Meetup";
@@ -10,6 +11,13 @@ import historyMariaAndAlina from "../sourse/sass/images/stories/Maria-and-Alina.
 function Main({ loggedIn }) {
   return (
     <>
+      <Helmet>
+        <title>Старшие Братья Старшие Сёстры</title>
+        <meta name="description" content="«Старшие Братья Старшие Сестры» — межрегиональная общественная организация содействия воспитанию подрастающего поколения.
+        НКО поддерживает детей, которым требуется внимание: оставшихся без попечения родителей, приемных, детей из неполных, многодетных или неблагополучных семей,
+        детей с ограниченными возможностями."/>
+        <meta name="keywords" content="Дети"/>
+      </Helmet>
       <section className="lead page__section">
         <article className="card-container card-container_type_identical">
           {loggedIn === true ? (

@@ -1,9 +1,15 @@
 import React from "react";
+import { Helmet } from 'react-helmet';
 import mentorIcon from "../sourse/sass/images/svg/calendar_logo.svg";
 
 function About() {
   return (
     <main className="main">
+      <Helmet>
+        <title>О нас</title>
+        <meta name="description" content="Описание и главная информация об организации Старшие Братья Старшие Сёстры"/>
+        <meta name="keywords" content="Старшие Братья Старшие Сёстры"/>
+      </Helmet>
       <section className="about page__section">
         <h3 className="chapter-title about__title">
           Наставники.про – цифоровая информационная платформа огрганизации «Старшие Братья Старшие Сестры». Созданная для поддержки наставников
