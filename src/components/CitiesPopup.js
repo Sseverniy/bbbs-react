@@ -13,6 +13,7 @@ function CitiesPopup({ isOpen, toggleModal, cities }) {
                 contentLabel="My dialog"
                 className="popup__container popup__container_type_cities"
                 overlayClassName="popup popup_opened popup_type_cities cities"
+                closeTimeoutMS={500}
                 shouldCloseOnOverlayClick
             >
                 <h2 className="cities__title section-title">Выберите ваш город</h2>

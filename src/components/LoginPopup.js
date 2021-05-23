@@ -34,7 +34,8 @@ function LoginPopup({ isOpen, toggleModal, onLogin }) {
         onRequestClose={toggleModal}
         contentLabel='My dialog'
         className='popup popup_opened popup_type_sign-in'
-        overlayClassName='popup popup_opened'
+        closeTimeoutMS={500}
+        overlayClassName='popup_opened'
         shouldCloseOnOverlayClick
       >
         <form className='popup__container popup__container_type_sign-in' onSubmit={handleSubmit(onSubmit)}>
