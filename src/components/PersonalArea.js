@@ -1,10 +1,16 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { Helmet } from 'react-helmet';
 import MeetingReviewCard from "./MeetingReviewCard";
 
 function PersonalArea() {
   return (
     <section className="personal-area page__section">
+      <Helmet>
+        <title>Личный кабинет</title>
+        <meta name="description" content="Личный кабинет наставника"/>
+        <meta name="keywords" content="Личный кабинет"/>
+      </Helmet>
       <div className="personal-area__user-info">
         <Link
           to="/"
