@@ -12,7 +12,7 @@ import CalendarCaptionPopup from './CalendarCaptionPopup';
 import CalendarConfirmPopup from './CalendarConfirmPopup';
 import CalendarDonePopup from './CalendarDonePopup';
 import CitiesPopup from './CitiesPopup';
-import { getInfoProfileUsers, authorize, getListCities, getHomePage } from '../utils/api';
+import { getInfoProfileUsers, authorize, getListCities, getHomePage, getListEvents } from '../utils/api';
 
 function App() {
   // пока захардкодим, чтобы тестировать
@@ -29,6 +29,7 @@ function App() {
   const [isDonePopupOpen, setIsDonePopupOpen] = useState(false);
 
   const [listOfCities, setListOfCities] = useState([]);
+  const [listOfEvents, setListOfEvents] = useState([]);
   // стейты главной страницы
   const [historyMain, setHistoryMain] = useState({});
   const [placeMain, setPlaceMain] = useState({});
@@ -114,6 +115,13 @@ function App() {
       .catch(() => {
         console.log('Ошибка загрузки городов');
       });
+    getListEvents()
+      .then((data) => {
+        setListOfEvents(data.data);
+      })
+      .catch(() => {
+        console.log('Ошибка загрузки мероприятий');
+      })
   }, []);
 
   useEffect(() => {
@@ -137,7 +145,7 @@ function App() {
             />
           </Route>
           <Route exact path='/calendar'>
-            <Calendar toggleModal={toggleModalCaption} />
+            <Calendar toggleModal={toggleModalCaption} events={listOfEvents} />
           </Route>
           <Route exact path='/about'>
             <About />
