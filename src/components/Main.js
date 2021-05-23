@@ -9,7 +9,7 @@ import Question from './Question';
 import calendarLogo from '../sourse/sass/images/svg/calendar_logo.svg';
 // import historyMariaAndAlina from '../sourse/sass/images/stories/Maria-and-Alina.jpg';
 
-function Main({ loggedIn, history, place, video, movies, questions, articles }) {
+function Main({ loggedIn, history, place, video, movies, questions, articles, toggleModal, event }) {
   console.log(articles);
   const secondsToHM = (time) => {
     const h = Math.floor(time / 60);
@@ -36,7 +36,7 @@ function Main({ loggedIn, history, place, video, movies, questions, articles }) 
       <section className='lead page__section'>
         <article className='card-container card-container_type_identical'>
           {loggedIn === true ? (
-            <Meetup />
+            <Meetup event={event} toggleModal={toggleModal} />
           ) : (
             <article className='card card_color_green stub'>
               <div className='stub__upper-element'>
@@ -167,6 +167,20 @@ Main.propTypes = {
   movies: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
   questions: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
   articles: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
+  toggleModal: PropTypes.func.isRequired,
+  event: PropTypes.shape({
+    id: PropTypes.number,
+    booked: PropTypes.bool,
+    address: PropTypes.string,
+    contact: PropTypes.string,
+    title: PropTypes.string,
+    description: PropTypes.string,
+    startAt: PropTypes.string,
+    endAt:  PropTypes.string,
+    seats: PropTypes.number,
+    takenSeats: PropTypes.number,
+    city: PropTypes.number,
+  }).isRequired,
 };
 
 export default Main;
