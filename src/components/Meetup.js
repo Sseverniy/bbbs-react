@@ -1,6 +1,7 @@
 import React from 'react';
 
-function Meetup() {
+// eslint-disable-next-line react/prop-types
+function Meetup({ toggleModal }) {
   return (
     <article className='calendar'>
       <div className='calendar__caption'>
@@ -29,8 +30,9 @@ function Meetup() {
           <button
             className='button button_theme_light calendar__button calendar__button_selected calendar__button_action_sign-up'
             type='button'
+            onClick={toggleModal}
           >
-            Отменить запись
+            Записаться
           </button>
           <p className='calendar__place-left' />
           <button className='button calendar__button-dots button_theme_light' type='button'>

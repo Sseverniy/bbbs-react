@@ -12,7 +12,7 @@ import CalendarCaptionPopup from './CalendarCaptionPopup';
 import CalendarConfirmPopup from './CalendarConfirmPopup';
 import CalendarDonePopup from './CalendarDonePopup';
 import CitiesPopup from './CitiesPopup';
-import { getInfoProfileUsers, authorize } from '../utils/api';
+import { getInfoProfileUsers, authorize, getListCities } from '../utils/api';
 
 function App() {
   // пока захардкодим, чтобы тестировать
@@ -24,6 +24,12 @@ function App() {
   const [isCitiesPopupOpen, setCitiesPopupOpen] = useState(false);
   const [isLoginPopupOpen, setIsLoginPopupOpen] = useState(false);
 
+  const [isCaptionPopupOpen, setIsCaptionPopupOpen] = useState(false);
+  const [isConfirmPopupOpen, setIsConfirmPopupOpen] = useState(false);
+  const [isDonePopupOpen, setIsDonePopupOpen] = useState(false);
+
+  const [listOfCities, setListOfCities] = useState([]);
+
   function toggleModalCities() {
     setCitiesPopupOpen(!isCitiesPopupOpen);
   }
@@ -31,6 +37,21 @@ function App() {
     if (loggedIn === false) {
       setIsLoginPopupOpen(!isLoginPopupOpen);
     }
+  }
+  function toggleModalCaption() {
+    setIsCaptionPopupOpen(!isCaptionPopupOpen);
+  }
+  function toggleModalConfirm() {
+    if (isCaptionPopupOpen) {
+      toggleModalCaption();
+    }
+    setIsConfirmPopupOpen(!isConfirmPopupOpen);
+  }
+  function toggleModalDone() {
+    if (isConfirmPopupOpen) {
+      toggleModalConfirm();
+    }
+    setIsDonePopupOpen(!isDonePopupOpen);
   }
 
   function handleTokenCheck(access) {
@@ -66,6 +87,23 @@ function App() {
     }
   }, []);
 
+  useEffect(() => {
+    getListCities()
+      .then((data) => {
+        setListOfCities(data.data);
+      })
+      .catch(() => {
+        console.log('Ошибка загрузки городов');
+      });
+  }, []);
+
+  useEffect(() => {
+    const access = localStorage.getItem('access');
+    if (access) {
+      handleTokenCheck(access);
+    }
+  }, []);
+
   return (
     <>
       <Header toggleModal={toggleModalLogin} loggedIn={loggedIn} />
@@ -75,10 +113,7 @@ function App() {
             <Main loggedIn={loggedIn} />
           </Route>
           <Route exact path='/calendar'>
-            <Calendar />
-            <CalendarCaptionPopup />
-            <CalendarConfirmPopup />
-            <CalendarDonePopup />
+            <Calendar toggleModal={toggleModalCaption} />
           </Route>
           <Route exact path='/about'>
             <About />
@@ -88,7 +123,15 @@ function App() {
       </div>
       <Footer />
       <LoginPopup toggleModal={toggleModalLogin} isOpen={isLoginPopupOpen} onLogin={handleLogin} />
-      <CitiesPopup toggleModal={toggleModalCities} isOpen={isCitiesPopupOpen} />
+      <CitiesPopup toggleModal={toggleModalCities} isOpen={isCitiesPopupOpen} cities={listOfCities} />
+      <CalendarCaptionPopup
+        toggleModal={toggleModalCaption}
+        isOpen={isCaptionPopupOpen}
+        nextPopup={toggleModalConfirm}
+      />
+      <CalendarConfirmPopup toggleModal={toggleModalConfirm} isOpen={isConfirmPopupOpen} nextPopup={toggleModalDone} />
+      <CalendarDonePopup toggleModal={toggleModalDone} isOpen={isDonePopupOpen} />
+      <CitiesPopup toggleModal={toggleModalCities} cities={listOfCities} isOpen={isCitiesPopupOpen} />
     </>
   );
 }
