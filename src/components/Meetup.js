@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { format } from 'date-fns';
-import ruLocale from "date-fns/locale/ru";
+import ruLocale from 'date-fns/locale/ru';
 
 function Meetup({ toggleModal, event }) {
   const [startAt] = useState(new Date(event.startAt));

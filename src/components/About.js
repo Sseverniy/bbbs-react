@@ -1,5 +1,5 @@
 import React from "react";
-import { Helmet } from 'react-helmet';
+import { Helmet } from "react-helmet";
 import mentorIcon from "../sourse/sass/images/svg/calendar_logo.svg";
 
 function About() {
