@@ -55,6 +55,22 @@ function App() {
     city: 1,
   });
 
+  let prevScrollpos = window.pageYOffset;
+
+  useEffect(() => {
+    window.onscroll = () => {
+      const currentScrollPos = window.pageYOffset;
+      if (prevScrollpos > currentScrollPos) {
+        document.getElementById('navbar').style.top = '0px';
+        console.log('down');
+      } else {
+        document.getElementById('navbar').style.top = '-100px';
+        console.log('up');
+      }
+      prevScrollpos = currentScrollPos;
+    };
+  }, []);
+
   function toggleModalCities() {
     setCitiesPopupOpen(!isCitiesPopupOpen);
   }
@@ -202,7 +218,12 @@ function App() {
         nextPopup={toggleModalConfirm}
         event1={event1}
       />
-      <CalendarConfirmPopup toggleModal={toggleModalConfirm} isOpen={isConfirmPopupOpen} nextPopup={toggleModalDone} event1={event1} />
+      <CalendarConfirmPopup
+        toggleModal={toggleModalConfirm}
+        isOpen={isConfirmPopupOpen}
+        nextPopup={toggleModalDone}
+        event1={event1}
+      />
       <CalendarDonePopup toggleModal={toggleModalDone} isOpen={isDonePopupOpen} event1={event1} />
       <CitiesPopup toggleModal={toggleModalCities} cities={listOfCities} isOpen={isCitiesPopupOpen} />
     </>

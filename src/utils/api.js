@@ -15,7 +15,6 @@ export const authorize = (login, password) =>
     body: JSON.stringify({ login, password }),
   });
 
-
 export const getListCities = () =>
   axios.get(`${BASE_URL}/cities`, {
     headers,
