@@ -176,7 +176,7 @@ Main.propTypes = {
     title: PropTypes.string,
     description: PropTypes.string,
     startAt: PropTypes.string,
-    endAt:  PropTypes.string,
+    endAt: PropTypes.string,
     seats: PropTypes.number,
     takenSeats: PropTypes.number,
     city: PropTypes.number,
