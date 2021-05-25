@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { withRouter, Switch, Route } from 'react-router-dom';
+import {format} from 'date-fns';
+import ruLocale from 'date-fns/locale/ru';
 import ProtectedRoute from './ProtectedRoute';
 import Main from './Main';
 import Header from './Header';
@@ -30,6 +32,7 @@ function App() {
 
   const [listOfCities, setListOfCities] = useState([]);
   const [listOfEvents, setListOfEvents] = useState([]);
+  const [listOfMonths, setListOfMonths] = useState([]);
   // стейты главной страницы
   const [historyMain, setHistoryMain] = useState({});
   const [placeMain, setPlaceMain] = useState({});
@@ -37,6 +40,20 @@ function App() {
   const [moviesMain, setMoviesMain] = useState([]);
   const [questionsMain, setQuestionsMain] = useState([]);
   const [articlesMain, setArticlesMain] = useState([]);
+  const [event1, setEvent1] =useState({
+    id: 1,
+    booked: true,
+    address: 'Садовническая наб., д. 77 стр. 1 (офис компании Ernst&Young)',
+    contact: 'Александра, +7 926 356-78-90',
+    title: 'Субботний meet up: учимся проходить интевью',
+    description:
+      'Наконец-то наступила весна и мы пережили эту долгую зиму! И возможно, что внутренних сил и ресурса сейчас не так много, а до окончания учебного года ещё целых несколько месяцев. Поэтому приглашаем вас на встречу нашего ресурсного клуба "Наставник PRO", которую мы хотим посвятить теме поиска моральных сил, смыслов и внутреннего ресурса для общения и взаимодействия с нашими подопечными.',
+    startAt: '2021-05-15T06:00:00Z',
+    endAt: '2021-05-15T08:00:00Z',
+    seats: 100,
+    takenSeats: 0,
+    city: 1,
+  });
 
   function toggleModalCities() {
     setCitiesPopupOpen(!isCitiesPopupOpen);
@@ -90,7 +107,6 @@ function App() {
 
   const handleGetMain = () => {
     getHomePage().then((data) => {
-      console.log(data);
       setHistoryMain(data.data.history);
       setPlaceMain(data.data.place);
       setVideoMain(data.data.video);
@@ -99,6 +115,20 @@ function App() {
       setArticlesMain(data.data.articles);
     });
   };
+  function sortByMonth(month) {
+    if (month === undefined){
+      setListOfMonths(listOfEvents);
+      return;
+    }
+   console.log(listOfEvents)
+   const newData = listOfEvents.filter((item) => {
+     const data = format(new Date(item.startAt), 'LLLL', { locale: ruLocale });
+     console.log('месяц в массиве',data);
+     console.log('месяц выбранный',month);
+     return data === month;
+ })
+   setListOfMonths(newData)
+  }
 
   useEffect(() => {
     const access = localStorage.getItem('access');
@@ -118,6 +148,7 @@ function App() {
     getListEvents()
       .then((data) => {
         setListOfEvents(data.data);
+        setListOfMonths(data.data);
       })
       .catch(() => {
         console.log('Ошибка загрузки мероприятий');
@@ -147,7 +178,7 @@ function App() {
             />
           </Route>
           <Route exact path='/calendar'>
-            <Calendar toggleModal={toggleModalCaption} events={listOfEvents} />
+            <Calendar toggleModal={toggleModalCaption} events={listOfEvents} sortByMonth={sortByMonth} listOfMonths={listOfMonths} setEvent1={setEvent1} />
           </Route>
           <Route exact path='/about'>
             <About />
@@ -162,6 +193,7 @@ function App() {
         toggleModal={toggleModalCaption}
         isOpen={isCaptionPopupOpen}
         nextPopup={toggleModalConfirm}
+        event1={event1}
       />
       <CalendarConfirmPopup toggleModal={toggleModalConfirm} isOpen={isConfirmPopupOpen} nextPopup={toggleModalDone} />
       <CalendarDonePopup toggleModal={toggleModalDone} isOpen={isDonePopupOpen} />
