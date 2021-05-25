@@ -179,7 +179,7 @@ function App() {
             />
           </Route>
           <Route exact path='/calendar'>
-            <Calendar toggleModal={toggleModalCaption} events={listOfEvents} sortByMonth={sortByMonth} listOfMonths={listOfMonths} setEvent1={setEvent1} />
+            <Calendar toggleModal={toggleModalCaption} events={listOfEvents} sortByMonth={sortByMonth} listOfMonths={listOfMonths} setEvent1={setEvent1} toggleDone={toggleModalDone} />
           </Route>
           <Route exact path='/about'>
             <About />

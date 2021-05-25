@@ -42,13 +42,26 @@ export const getListEvents = () =>
     },
   });
 
-export const signUpForEvent = () =>
+export const signUpForEvent = (bookedEvent) =>
   axios.post(`${BASE_URL}/afisha/event-participants`, {
     header: {
       ...headers,
       Authorization: `Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjIwNTM4OTMzLCJqdGkiOiIwOWZlNWUxNmI1MjI0YmM3ODJiYTc1YmM1OWExZWUzZSIsInVzZXJfaWQiOjF9._cDyG8Vp2HWzPPp-Hrm-P5FD5P0zcywVd4o4Gt2FL2M`,
-      data: { event: 1 },
     },
+    body: JSON.stringify({
+      data: { event: bookedEvent }
+    })
+  });
+
+export const signOutFromEvent = (deletedEvent) =>
+  axios.delete(`${BASE_URL}/afisha/event-participants/`, {
+    header: {
+      ...headers,
+      Authorization: `Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjIwNTM4OTMzLCJqdGkiOiIwOWZlNWUxNmI1MjI0YmM3ODJiYTc1YmM1OWExZWUzZSIsInVzZXJfaWQiOjF9._cDyG8Vp2HWzPPp-Hrm-P5FD5P0zcywVd4o4Gt2FL2M`,
+    },
+    body: JSON.stringify({
+      data: { event: deletedEvent }
+    })
   });
 
 mock.onPost(`${BASE_URL}/token`).reply(200, {
@@ -140,6 +153,8 @@ mock.onPost(`${BASE_URL}/afisha/event-participants`).reply(200, {
   id: 2,
   event: 4,
 });
+
+mock.onDelete(`${BASE_URL}/afisha/event-participants`).reply(200, { message: 'OK', result: true });
 
 mock.onGet(`${BASE_URL}/main`).reply(200, {
   event: {
