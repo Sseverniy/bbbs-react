@@ -175,6 +175,7 @@ function App() {
               articles={articlesMain}
               toggleModal={toggleModalCaption}
               event={listOfEvents[0]}
+              setEvent1={setEvent1}
             />
           </Route>
           <Route exact path='/calendar'>

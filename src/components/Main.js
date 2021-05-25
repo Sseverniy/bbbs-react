@@ -9,7 +9,7 @@ import Question from './Question';
 import calendarLogo from '../sourse/sass/images/svg/calendar_logo.svg';
 // import historyMariaAndAlina from '../sourse/sass/images/stories/Maria-and-Alina.jpg';
 
-function Main({ loggedIn, history, place, video, movies, questions, articles, toggleModal, event }) {
+function Main({ loggedIn, history, place, video, movies, questions, articles, toggleModal, event, setEvent1 }) {
   console.log(articles);
   const secondsToHM = (time) => {
     const h = Math.floor(time / 60);
@@ -36,7 +36,7 @@ function Main({ loggedIn, history, place, video, movies, questions, articles, to
       <section className='lead page__section'>
         <article className='card-container card-container_type_identical'>
           {loggedIn === true ? (
-            <Meetup event={event} toggleModal={toggleModal} />
+            <Meetup event1={event} toggleModal={toggleModal} setEvent1={setEvent1} />
           ) : (
             <article className='card card_color_green stub'>
               <div className='stub__upper-element'>
@@ -181,6 +181,7 @@ Main.propTypes = {
     takenSeats: PropTypes.number,
     city: PropTypes.number,
   }).isRequired,
+  setEvent1: PropTypes.func.isRequired,
 };
 
 export default Main;
