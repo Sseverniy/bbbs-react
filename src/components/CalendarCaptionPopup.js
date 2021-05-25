@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, {useEffect, useState} from 'react';
 import PropTypes from 'prop-types';
 import {format} from 'date-fns';
 import ruLocale from 'date-fns/locale/ru';
@@ -6,8 +6,12 @@ import ruLocale from 'date-fns/locale/ru';
 import CalendarParentPopup from './CalendarParentPopup';
 
 function CalendarCaptionPopup({ isOpen, toggleModal, nextPopup, event1 }) {
-  const [startAt] = useState(new Date(event1.startAt));
-  const [endAt] = useState(new Date(event1.endAt));
+  const [startAt, setStartAt] = useState(new Date(event1.startAt));
+  const [endAt, setEndAt] = useState(new Date(event1.endAt));
+  useEffect(()=> {
+    setStartAt(new Date(event1.startAt));
+    setEndAt(new Date(event1.endAt));
+  },[event1])
   return (
     <CalendarParentPopup isOpen={isOpen} toggleModal={toggleModal}>
       <>
