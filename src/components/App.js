@@ -10,8 +10,8 @@ import Footer from './Footer';
 import About from './About';
 import PersonalArea from './PersonalArea';
 import LoginPopup from './LoginPopup';
-import CalendarCaptionPopup from './CalendarCaptionPopup';
 import CalendarConfirmPopup from './CalendarConfirmPopup';
+import CalendarCaptionPopup from './CalendarCaptionPopup';
 import CalendarDonePopup from './CalendarDonePopup';
 import CitiesPopup from './CitiesPopup';
 import { getInfoProfileUsers, authorize, getListCities, getHomePage, getListEvents } from '../utils/api';
@@ -195,8 +195,8 @@ function App() {
         nextPopup={toggleModalConfirm}
         event1={event1}
       />
-      <CalendarConfirmPopup toggleModal={toggleModalConfirm} isOpen={isConfirmPopupOpen} nextPopup={toggleModalDone} />
-      <CalendarDonePopup toggleModal={toggleModalDone} isOpen={isDonePopupOpen} />
+      <CalendarConfirmPopup toggleModal={toggleModalConfirm} isOpen={isConfirmPopupOpen} nextPopup={toggleModalDone} event1={event1} />
+      <CalendarDonePopup toggleModal={toggleModalDone} isOpen={isDonePopupOpen} event1={event1} />
       <CitiesPopup toggleModal={toggleModalCities} cities={listOfCities} isOpen={isCitiesPopupOpen} />
     </>
   );
