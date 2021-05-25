@@ -3,9 +3,13 @@ import PropTypes from 'prop-types';
 import { format } from 'date-fns';
 import ruLocale from 'date-fns/locale/ru';
 
-function Meetup({ toggleModal, event }) {
-  const [startAt] = useState(new Date(event.startAt));
-  const [endAt] = useState(new Date(event.endAt));
+function Meetup({ toggleModal, event1, setEvent1 }) {
+  const [startAt] = useState(new Date(event1.startAt));
+  const [endAt] = useState(new Date(event1.endAt));
+  function clickHandler () {
+    toggleModal();
+    setEvent1(event1)
+  }
   return (
     <article className='calendar'>
       <div className='calendar__caption'>
@@ -14,7 +18,7 @@ function Meetup({ toggleModal, event }) {
           <p className='calendar__weekday'>{format(startAt, 'LLLL', { locale: ruLocale })} / {format(startAt, 'EEEE', { locale: ruLocale }) }</p>
         </div>
         <div className='calendar__about'>
-          <h2 className='section-title calendar__title'>{event.title}</h2>
+          <h2 className='section-title calendar__title'>{event1.title}</h2>
           <p className='calendar__date'>{format(startAt, 'dd') }</p>
         </div>
       </div>
@@ -24,21 +28,21 @@ function Meetup({ toggleModal, event }) {
             <p className='calendar__time'>{format(startAt, 'hh:mm')}&ndash;{format(endAt, 'hh:mm')}</p>
           </li>
           <li className='calendar__info-item'>
-            <p className='calendar__place'>{event.address}</p>
+            <p className='calendar__place'>{event1.address}</p>
           </li>
           <li className='calendar__info-item'>
-            <p className='calendar__contact'>{event.contact}</p>
+            <p className='calendar__contact'>{event1.contact}</p>
           </li>
         </ul>
         <div className='calendar__submit'>
           <button
-            className='button button_theme_light calendar__button calendar__button_selected calendar__button_action_sign-up'
+            className='button button_theme_light calendar__button calendar__button_selected calendar__button_action_sign-up '
             type='button'
-            onClick={toggleModal}
+            onClick={clickHandler}
           >
             Записаться
           </button>
-          <p className='calendar__place-left'>Осталось {event.seats - event.takenSeats} мест</p>
+          <p className='calendar__place-left'>Осталось {event1.seats - event1.takenSeats} мест</p>
           <button className='button calendar__button-dots button_theme_light' type='button'>
             &#8226;&#8226;&#8226;
           </button>
@@ -50,7 +54,8 @@ function Meetup({ toggleModal, event }) {
 
 Meetup.propTypes = {
   toggleModal: PropTypes.func.isRequired,
-  event:
+  setEvent1: PropTypes.func.isRequired,
+  event1:
     PropTypes.shape({
       id: PropTypes.number,
       booked: PropTypes.bool,

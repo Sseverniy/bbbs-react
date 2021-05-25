@@ -1,41 +1,43 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+import {format} from 'date-fns';
+import ruLocale from 'date-fns/locale/ru';
+
 import CalendarParentPopup from './CalendarParentPopup';
 
-function CalendarCaptionPopup({ isOpen, toggleModal, nextPopup }) {
+function CalendarCaptionPopup({ isOpen, toggleModal, nextPopup, event1 }) {
+  const [startAt] = useState(new Date(event1.startAt));
+  const [endAt] = useState(new Date(event1.endAt));
   return (
     <CalendarParentPopup isOpen={isOpen} toggleModal={toggleModal}>
       <>
         <div className='calendar__caption'>
           <div className='calendar__info'>
             <p className='calendar__type'>Волонтёры + дети</p>
-            <p className='calendar__weekday'>Декабрь / понедельник</p>
+            <p className='calendar__weekday'>{format(startAt, 'LLLL', { locale: ruLocale })} / {format(startAt, 'EEEE', { locale: ruLocale }) }</p>
           </div>
           <div className='calendar__about'>
             <h2 className='section-title calendar__title calendar__title_type_popup'>
-              Занятие с выпускниками: как составить резюме
+              {event1.title}
             </h2>
-            <p className='calendar__date'>20</p>
+            <p className='calendar__date'>{format(startAt, 'dd') }</p>
           </div>
         </div>
         <div className='calendar__meetup'>
           <ul className='calendar__info-list'>
             <li className='calendar__info-item'>
-              <p className='calendar__time'>12:00–14:00</p>
+              <p className='calendar__time'>{format(startAt, 'hh:mm')}&ndash;{format(endAt, 'hh:mm')}</p>
             </li>
             <li className='calendar__info-item'>
-              <p className='calendar__place'>Садовническая наб., д. 77 стр. 1 (офис компании Ernst&Young)</p>
+              <p className='calendar__place'>{event1.address}</p>
             </li>
             <li className='calendar__info-item'>
-              <p className='calendar__contact'>Александра, +7 926 356-78-90</p>
+              <p className='calendar__contact'>{event1.contact}</p>
             </li>
           </ul>
           <div className='calendar__description'>
             <p className='paragraph calendar__desc-paragraph'>
-              Наконец-то наступила весна и мы пережили эту долгую зиму! И возможно, что внутренних сил и ресурса сейчас
-              не так много, а до окончания учебного года ещё целых несколько месяцев. Поэтому приглашаем вас на встречу
-              нашего ресурсного клуба &quot;Наставник PRO&quot;, которую мы хотим посвятить теме поиска моральных сил,
-              смыслов и внутреннего ресурса для общения и взаимодействия с нашими подопечными.
+              {event1.description}
             </p>
           </div>
           <div className='calendar__submit'>
@@ -54,6 +56,21 @@ CalendarCaptionPopup.propTypes = {
   isOpen: PropTypes.bool.isRequired,
   toggleModal: PropTypes.func.isRequired,
   nextPopup: PropTypes.func.isRequired,
+  event1:
+  PropTypes.shape({
+    id: PropTypes.number,
+    booked: PropTypes.bool,
+    address: PropTypes.string,
+    contact: PropTypes.string,
+    title: PropTypes.string,
+    description: PropTypes.string,
+    startAt: PropTypes.string,
+    endAt:  PropTypes.string,
+    seats: PropTypes.number,
+    takenSeats: PropTypes.number,
+    city: PropTypes.number,
+  })
+    .isRequired
 };
 
 export default CalendarCaptionPopup;

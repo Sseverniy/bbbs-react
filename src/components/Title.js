@@ -3,14 +3,22 @@ import PropTypes from 'prop-types';
 // import { format } from 'date-fns';
 // import ruLocale from 'date-fns/locale/ru';
 
-function Title({ month }) {
+function Title({ month, onClick, }) {
   const [isChose, setIsChose] = React.useState(false);
-  const monthTagClassName = (
-    `button tags__button ${isChose ? 'tags__button_active' : ''}`
-  );
+  const [btnClass, setBtnClass] = React.useState('button tags__button');
+  // let monthTagClassName = (
+  //   `button tags__button ${isChose ? 'tags__button_active' : ''}`
+  // );
 
   function chooseMonthTag(e) {
     setIsChose(!isChose);
+    if(isChose) {
+      setBtnClass('button tags__button');
+      onClick();
+      return
+    }
+    setBtnClass('button tags__button tags__button_active');
+    onClick(month.toLowerCase());
     console.log(e.target.innerText);
   }
 
@@ -18,7 +26,7 @@ function Title({ month }) {
 
   return (
     <li className='tags__list-item'>
-      <button className={monthTagClassName} type='button' onClick={chooseMonthTag}>
+      <button className={btnClass} type='button' onClick={chooseMonthTag}>
         {finalMonthName}
       </button>
     </li>
@@ -27,7 +35,11 @@ function Title({ month }) {
 
 Title.propTypes = {
   month: PropTypes.string
-  .isRequired
+  .isRequired,
+  onClick: PropTypes.func.isRequired,
+  // selectedMonths: PropTypes.arrayOf(String).isRequired,
+  // setSelectedMonths: PropTypes.func.isRequired,
+
 };
 
 export default Title;
