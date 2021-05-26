@@ -12,7 +12,11 @@
       "import/no-extraneous-dependencies": ["error", {"devDependencies": true}]
     },
     "globals": {
-      "localStorage": true      
+      "localStorage": true
+    },
+    "env": {
+      "browser": true
+
     }
   }
 

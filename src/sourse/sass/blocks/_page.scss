@@ -12,7 +12,7 @@
 
 .page__section {
   margin: 0 auto;
-  padding: 80px 75px 0;
+  padding: 163px 75px 0;
 }
 
 @include atDesktop1440 {
@@ -24,7 +24,7 @@
 
 @include atDesktop1024 {
   .page__section {
-    padding: 40px 127px 0;
+    padding: 146px 127px 0;
   }
 }
 
@@ -37,6 +37,6 @@
 
 @include atMobile {
   .page__section {
-    padding: 20px 15px 0;
+    padding: 60px 15px 0;
   }
 }

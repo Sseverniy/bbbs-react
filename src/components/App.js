@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { withRouter, Switch, Route } from 'react-router-dom';
-import {format} from 'date-fns';
+import { format } from 'date-fns';
 import ruLocale from 'date-fns/locale/ru';
 import ProtectedRoute from './ProtectedRoute';
 import Main from './Main';
@@ -39,8 +39,7 @@ function App() {
   const [videoMain, setVideoMain] = useState({});
   const [moviesMain, setMoviesMain] = useState([]);
   const [questionsMain, setQuestionsMain] = useState([]);
-  const [articlesMain, setArticlesMain] = useState([]);
-  const [event1, setEvent1] =useState({
+  const [event1, setEvent1] = useState({
     id: 1,
     booked: true,
     address: 'Садовническая наб., д. 77 стр. 1 (офис компании Ernst&Young)',
@@ -125,22 +124,21 @@ function App() {
       setVideoMain(data.data.video);
       setMoviesMain(data.data.movies);
       setQuestionsMain(data.data.questions);
-      setArticlesMain(data.data.articles);
     });
   };
   function sortByMonth(month) {
-    if (month === undefined){
+    if (month === undefined) {
       setListOfMonths(listOfEvents);
       return;
     }
-   console.log(listOfEvents)
-   const newData = listOfEvents.filter((item) => {
-     const data = format(new Date(item.startAt), 'LLLL', { locale: ruLocale });
-     console.log('месяц в массиве',data);
-     console.log('месяц выбранный',month);
-     return data === month;
- })
-   setListOfMonths(newData)
+    console.log(listOfEvents);
+    const newData = listOfEvents.filter((item) => {
+      const data = format(new Date(item.startAt), 'LLLL', { locale: ruLocale });
+      console.log('месяц в массиве', data);
+      console.log('месяц выбранный', month);
+      return data === month;
+    });
+    setListOfMonths(newData);
   }
 
   useEffect(() => {
@@ -165,7 +163,7 @@ function App() {
       })
       .catch(() => {
         console.log('Ошибка загрузки мероприятий');
-      })
+      });
   }, []);
 
   useEffect(() => {
@@ -185,14 +183,19 @@ function App() {
               video={videoMain}
               movies={moviesMain}
               questions={questionsMain}
-              articles={articlesMain}
               toggleModal={toggleModalCaption}
               event={listOfEvents[0]}
               setEvent1={setEvent1}
             />
           </Route>
           <Route exact path='/calendar'>
-            <Calendar toggleModal={toggleModalCaption} events={listOfEvents} sortByMonth={sortByMonth} listOfMonths={listOfMonths} setEvent1={setEvent1} toggleDone={toggleModalDone} />
+            <Calendar
+              toggleModal={toggleModalCaption}
+              events={listOfEvents}
+              sortByMonth={sortByMonth}
+              listOfMonths={listOfMonths}
+              setEvent1={setEvent1}
+            />
           </Route>
           <Route exact path='/about'>
             <About />
@@ -209,7 +212,12 @@ function App() {
         nextPopup={toggleModalConfirm}
         event1={event1}
       />
-      <CalendarConfirmPopup toggleModal={toggleModalConfirm} isOpen={isConfirmPopupOpen} nextPopup={toggleModalDone} event1={event1} />
+      <CalendarConfirmPopup
+        toggleModal={toggleModalConfirm}
+        isOpen={isConfirmPopupOpen}
+        nextPopup={toggleModalDone}
+        event1={event1}
+      />
       <CalendarDonePopup toggleModal={toggleModalDone} isOpen={isDonePopupOpen} event1={event1} />
       <CitiesPopup toggleModal={toggleModalCities} cities={listOfCities} isOpen={isCitiesPopupOpen} />
     </>

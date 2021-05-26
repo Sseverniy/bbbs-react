@@ -10,9 +10,9 @@ function Meetup({ toggleModal, event1, setEvent1, toggleDone }) {
   // const [selectedCardClass, setSelectedCardClass] = useState('calendar');
   // const [bookedEvent, setbookedEvent] = useState(false);
 
-  function clickHandler () {
+  function clickHandler() {
     toggleModal();
-    setEvent1(event1)
+    setEvent1(event1);
   }
 
   // function bookEvent() {
@@ -38,17 +38,21 @@ function Meetup({ toggleModal, event1, setEvent1, toggleDone }) {
       <div className='calendar__caption'>
         <div className='calendar__info'>
           <p className='calendar__type'>Волонтёры + дети</p>
-          <p className='calendar__weekday'>{format(startAt, 'LLLL', { locale: ruLocale })} / {format(startAt, 'EEEE', { locale: ruLocale }) }</p>
+          <p className='calendar__weekday'>
+            {format(startAt, 'LLLL', { locale: ruLocale })} / {format(startAt, 'EEEE', { locale: ruLocale })}
+          </p>
         </div>
         <div className='calendar__about'>
           <h2 className='section-title calendar__title'>{event1.title}</h2>
-          <p className='calendar__date'>{format(startAt, 'dd') }</p>
+          <p className='calendar__date'>{format(startAt, 'dd')}</p>
         </div>
       </div>
       <div className='calendar__meetup'>
         <ul className='calendar__info-list'>
           <li className='calendar__info-item'>
-            <p className='calendar__time'>{format(startAt, 'hh:mm')}&ndash;{format(endAt, 'hh:mm')}</p>
+            <p className='calendar__time'>
+              {format(startAt, 'hh:mm')}&ndash;{format(endAt, 'hh:mm')}
+            </p>
           </li>
           <li className='calendar__info-item'>
             <p className='calendar__place'>{event1.address}</p>
