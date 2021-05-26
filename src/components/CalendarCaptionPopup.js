@@ -45,8 +45,8 @@ function CalendarCaptionPopup({ isOpen, toggleModal, nextPopup, event1 }) {
             </p>
           </div>
           <div className='calendar__submit'>
-            <button className='button button_theme_light button_action_confirm' type='button' onClick={nextPopup}>
-              Записаться
+            <button className='button button_theme_light button_action_confirm' type='button' onClick={()=> nextPopup(event1)}>
+              {event1.booked ? 'Отменить запись' : 'Записаться'}
             </button>
             <p className='calendar__place-left'>Осталось 5 мест</p>
           </div>

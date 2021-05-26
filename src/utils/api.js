@@ -107,7 +107,7 @@ mock.onGet(`${BASE_URL}/afisha/events`).reply(200, [
   },
   {
     id: 2,
-    booked: true,
+    booked: false,
     address: 'Садовническая наб., д. 77 стр. 1 (офис компании Ernst&Young)',
     contact: 'Александра, +7 926 356-78-90',
     title: 'Субботний meet up: учимся проходить интевью',

@@ -2,39 +2,39 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { format } from 'date-fns';
 import ruLocale from 'date-fns/locale/ru';
-import {signUpForEvent, signOutFromEvent} from '../utils/api';
+// import {signUpForEvent, signOutFromEvent} from '../utils/api';
 
 function Meetup({ toggleModal, event1, setEvent1, toggleDone }) {
   const [startAt] = useState(new Date(event1.startAt));
   const [endAt] = useState(new Date(event1.endAt));
-  const [selectedCardClass, setSelectedCardClass] = useState('calendar');
-  const [bookedEvent, setbookedEvent] = useState(false);
+  // const [selectedCardClass, setSelectedCardClass] = useState('calendar');
+  // const [bookedEvent, setbookedEvent] = useState(false);
 
   function clickHandler () {
     toggleModal();
     setEvent1(event1)
   }
 
-  function bookEvent() {
-    if (!bookedEvent) {
-      signUpForEvent(event1)
-        .then(() => {
-          toggleDone();
-          setbookedEvent(true);
-          setSelectedCardClass('calendar calendar_selected');
-        })
-        .catch((err) => console.log(err));
-    }
-    signOutFromEvent(event1)
-      .then(()=>{
-        console.log('Вы успешно отменили запись');
-        setbookedEvent(false);
-        setSelectedCardClass('calendar');
-      })
-      .catch(err => console.log(err))
-  }
+  // function bookEvent() {
+  //   if (!event1.booked) {
+  //     signUpForEvent(event1)
+  //       .then(() => {
+  //         toggleDone();
+  //         setbookedEvent(true);
+  //         // setSelectedCardClass('calendar calendar_selected');
+  //       })
+  //       .catch((err) => console.log(err));
+  //   }
+  //   signOutFromEvent(event1)
+  //     .then(()=>{
+  //       console.log('Вы успешно отменили запись');
+  //       setbookedEvent(false);
+  //       // setSelectedCardClass('calendar');
+  //     })
+  //     .catch((err) => console.log(`Возникла ошибка ${err.message} при попытке отменить запись`))
+  // }
   return (
-    <article className={selectedCardClass}>
+    <article className={event1.booked ? 'calendar calendar_selected' : 'calendar'}>
       <div className='calendar__caption'>
         <div className='calendar__info'>
           <p className='calendar__type'>Волонтёры + дети</p>
@@ -61,9 +61,9 @@ function Meetup({ toggleModal, event1, setEvent1, toggleDone }) {
           <button
             className='button button_theme_light calendar__button calendar__button_selected calendar__button_action_sign-up '
             type='button'
-            onClick={bookEvent}
+            onClick={()=> toggleDone(event1)}
           >
-            {bookedEvent ? 'Отменить запись' : 'Записаться'}
+            {event1.booked ? 'Отменить запись' : 'Записаться'}
           </button>
           <p className='calendar__place-left'>Осталось {event1.seats - event1.takenSeats} мест</p>
           <button className='button calendar__button-dots button_theme_light' type='button' onClick={clickHandler}>
