@@ -154,15 +154,33 @@ function Header({ toggleModal, loggedIn }) {
             </form>
           </li>
           <li className='menu__button-item'>
-            <button
+            {loggedIn ? (
+              <NavLink exact to='/profile' target='_self' className=''>
+                <button
+                  type='button'
+                  aria-label='Личный кабинет'
+                  title='Личный кабинет'
+                  className='menu__button menu__button_type_active-user'
+                />
+              </NavLink>
+            ) : (
+              <button
+                className={`menu__button ${loggedIn ? 'menu__button_type_active-user' : ' menu__button_type_user'}`}
+                onClick={toggleModal}
+                type='button'
+                aria-label='Личный кабинет'
+                title='Личный кабинет'
+              />
+            )}
+            {/* <button
               className={`menu__button ${
-                loggedIn === true ? 'menu__button_type_active-user' : ' menu__button_type_user'
+                loggedIn ? 'menu__button_type_active-user' : ' menu__button_type_user'
               }`}
               onClick={toggleModal}
               type='button'
               aria-label='Личный кабинет'
               title='Личный кабинет'
-            />
+            /> */}
           </li>
         </ul>
       </nav>
