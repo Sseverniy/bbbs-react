@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-// import videoPrev from '../sourse/sass/images/video/video-prev.png';
 
 function Movie({ imageUrl, info, link, title, tags }) {
   return (

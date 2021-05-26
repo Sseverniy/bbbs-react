@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-// import twoGirls from '../sourse/sass/images/where-to-go/two-girls-on-the-beach.jpg';
 
 function WhereToGo({ place }) {
   const { description, imageUrl, info, link, name, title } = place;
