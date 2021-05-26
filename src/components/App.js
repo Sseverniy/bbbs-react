@@ -55,22 +55,6 @@ function App() {
     city: 1,
   });
 
-  let prevScrollpos = window.pageYOffset;
-
-  useEffect(() => {
-    window.onscroll = () => {
-      const currentScrollPos = window.pageYOffset;
-      if (prevScrollpos > currentScrollPos) {
-        document.getElementById('navbar').style.top = '0px';
-        console.log('down');
-      } else {
-        document.getElementById('navbar').style.top = '-100px';
-        console.log('up');
-      }
-      prevScrollpos = currentScrollPos;
-    };
-  }, []);
-
   function toggleModalCities() {
     setCitiesPopupOpen(!isCitiesPopupOpen);
   }

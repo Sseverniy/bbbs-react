@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import NavBar from './NavBar';
@@ -8,9 +8,28 @@ function Header({ toggleModal, loggedIn }) {
   const [burgerWrap, setBurgerWrap] = useState(true);
   const [menuListHidden, setMenuListHidden] = useState(true);
   const [searchButton, setSearchButton] = useState(false);
+  console.log(burgerClick);
+  let prevScrollpos = '148px';
+
+  useEffect(() => {
+    window.onscroll = () => {
+      const currentScrollPos = window.pageYOffset;
+      if (prevScrollpos > currentScrollPos) {
+        document.getElementById('navbar').style.top = '0px';
+      } else {
+        document.getElementById('navbar').style.top = '-150px';
+        setBurgerClick(false);
+        setBurgerWrap(true);
+        setMenuListHidden(true);
+        setSearchButton(false);
+      }
+      prevScrollpos = currentScrollPos;
+    };
+  }, []);
 
   const hendleBurgerClick = () => {
     if (burgerClick === true) {
+      console.log('periy if');
       setBurgerClick(false);
       setBurgerWrap(true);
       setMenuListHidden(true);
@@ -35,8 +54,8 @@ function Header({ toggleModal, loggedIn }) {
   };
 
   return (
-    <header className={`header ${burgerClick === true ? 'heder_displayed' : ''} page__section`}>
-      <nav className={`menu ${searchButton === true ? 'menu_state_search' : ''}`} id='navbar'>
+    <header className={`header ${burgerClick === true ? 'heder_displayed' : ''} page__section`} id='navbar'>
+      <nav className={`menu ${searchButton === true ? 'menu_state_search' : ''}`}>
         <NavLink exact to='/' target='_self' className='menu__logo'>
           наставники.про
         </NavLink>

@@ -1,6 +1,13 @@
 .header {
-  padding-top: 40px;
-  transition: .2s linear;
+  padding-top: 47px;
+  transition: 0.3s linear;
+  box-sizing: border-box;
+  position: fixed;
+  width: 100%;
+  padding-bottom: 65px;
+  border-radius: 0 0 30px 30px;
+  background-color: $background;
+  z-index: 1;
 }
 
 .heder_displayed {
@@ -10,12 +17,14 @@
 
 @include atDesktop1024 {
   .header {
-    padding-top: 30px;
+    padding-top: 44px;
+    padding-bottom: 49px;
   }
 }
 
 @include atMobile {
   .header {
     padding-top: 15px;
+    padding-bottom: 0;
   }
 }

@@ -1,23 +1,22 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-import {format} from 'date-fns';
+import { format } from 'date-fns';
 import ruLocale from 'date-fns/locale/ru';
 import CalendarParentPopup from './CalendarParentPopup';
 
 function CalendarConfirmPopup({ isOpen, toggleModal, nextPopup, event1 }) {
   const [startAt, setStartAt] = useState(new Date(event1.startAt));
   const [endAt, setEndAt] = useState(new Date(event1.endAt));
-  useEffect(()=> {
+  useEffect(() => {
     setStartAt(new Date(event1.startAt));
     setEndAt(new Date(event1.endAt));
-  },[event1])
+  }, [event1]);
   return (
     <CalendarParentPopup isOpen={isOpen} toggleModal={toggleModal}>
       <>
         <h2 className='section-title calendar__title_type_popup calendar__title_type_confirmation'>
           Подтвердить запись на мероприятие « {event1.title}» {format(startAt, 'd MMMM', { locale: ruLocale })}
-          &nbsp;
-          c {format(startAt, 'hh:mm')}&ndash;{format(endAt, 'hh:mm')}
+          &nbsp; c {format(startAt, 'hh:mm')}&ndash;{format(endAt, 'hh:mm')}
         </h2>
         <div className='calendar__buttons'>
           <button className='button button_theme_light calendar__confirm' type='button' onClick={nextPopup}>
@@ -48,7 +47,7 @@ CalendarConfirmPopup.propTypes = {
     seats: PropTypes.number,
     takenSeats: PropTypes.number,
     city: PropTypes.number,
-  }).isRequired
-}
+  }).isRequired,
+};
 
 export default CalendarConfirmPopup;
