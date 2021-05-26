@@ -6,8 +6,9 @@
   right: 0;
   left: 0;
   bottom: 0;
-  background-color: rgba(0, 0, 0, .5);
-  transition: visibility .3s, opacity .3s linear;
+  background-color: rgba(0, 0, 0, 0.5);
+  transition: visibility 0.3s, opacity 0.3s linear;
+  z-index: 20;
 
   &__container {
     position: relative;
@@ -206,7 +207,7 @@
     }
 
     &_type_middle {
-      width: 200px
+      width: 200px;
     }
   }
 

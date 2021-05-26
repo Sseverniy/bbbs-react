@@ -8,28 +8,12 @@ function Header({ toggleModal, loggedIn }) {
   const [burgerWrap, setBurgerWrap] = useState(true);
   const [menuListHidden, setMenuListHidden] = useState(true);
   const [searchButton, setSearchButton] = useState(false);
-  console.log(burgerClick);
-  let prevScrollpos = '148px';
+  const [viewHeader, setViewHeader] = useState(false);
 
-  useEffect(() => {
-    window.onscroll = () => {
-      const currentScrollPos = window.pageYOffset;
-      if (prevScrollpos > currentScrollPos) {
-        document.getElementById('navbar').style.top = '0px';
-      } else {
-        document.getElementById('navbar').style.top = '-150px';
-        setBurgerClick(false);
-        setBurgerWrap(true);
-        setMenuListHidden(true);
-        setSearchButton(false);
-      }
-      prevScrollpos = currentScrollPos;
-    };
-  }, []);
+  let prevScrollpos = window.pageYOffset;
 
   const hendleBurgerClick = () => {
     if (burgerClick === true) {
-      console.log('periy if');
       setBurgerClick(false);
       setBurgerWrap(true);
       setMenuListHidden(true);
@@ -53,8 +37,29 @@ function Header({ toggleModal, loggedIn }) {
     }
   };
 
+  // отслеживаем скролл для скрытия/появления NavBara
+  useEffect(() => {
+    window.onscroll = () => {
+      const currentScrollPos = window.pageYOffset;
+      if (prevScrollpos > currentScrollPos) {
+        setViewHeader(false);
+      } else {
+        setViewHeader(true);
+        setBurgerClick(false);
+        setBurgerWrap(true);
+        setMenuListHidden(true);
+        setSearchButton(false);
+      }
+      prevScrollpos = currentScrollPos;
+    };
+  }, []);
+
   return (
-    <header className={`header ${burgerClick === true ? 'heder_displayed' : ''} page__section`} id='navbar'>
+    <header
+      className={`header ${burgerClick === true ? 'heder_displayed' : ''} page__section ${
+        viewHeader === true ? 'header_view' : ''
+      }`}
+    >
       <nav className={`menu ${searchButton === true ? 'menu_state_search' : ''}`}>
         <NavLink exact to='/' target='_self' className='menu__logo'>
           наставники.про

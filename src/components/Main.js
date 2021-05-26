@@ -5,12 +5,9 @@ import WhereToGo from './WhereToGo';
 import Movie from './Movie';
 import Meetup from './Meetup';
 import Question from './Question';
-// import graduatesBBBS from '../sourse/sass/images/video/video-main.jpg';
 import calendarLogo from '../sourse/sass/images/svg/calendar_logo.svg';
-// import historyMariaAndAlina from '../sourse/sass/images/stories/Maria-and-Alina.jpg';
 
-function Main({ loggedIn, history, place, video, movies, questions, articles, toggleModal, event, setEvent1 }) {
-  console.log(articles);
+function Main({ loggedIn, history, place, video, movies, questions, toggleModal, event, setEvent1 }) {
   const secondsToHM = (time) => {
     const h = Math.floor(time / 60);
     const m = Math.floor(time % 60);
@@ -166,7 +163,6 @@ Main.propTypes = {
   }).isRequired,
   movies: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
   questions: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
-  articles: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
   toggleModal: PropTypes.func.isRequired,
   event: PropTypes.shape({
     id: PropTypes.number,

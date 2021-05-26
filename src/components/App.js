@@ -39,7 +39,6 @@ function App() {
   const [videoMain, setVideoMain] = useState({});
   const [moviesMain, setMoviesMain] = useState([]);
   const [questionsMain, setQuestionsMain] = useState([]);
-  const [articlesMain, setArticlesMain] = useState([]);
   const [event1, setEvent1] = useState({
     id: 1,
     booked: true,
@@ -112,7 +111,6 @@ function App() {
       setVideoMain(data.data.video);
       setMoviesMain(data.data.movies);
       setQuestionsMain(data.data.questions);
-      setArticlesMain(data.data.articles);
     });
   };
   function sortByMonth(month) {
@@ -172,7 +170,6 @@ function App() {
               video={videoMain}
               movies={moviesMain}
               questions={questionsMain}
-              articles={articlesMain}
               toggleModal={toggleModalCaption}
               event={listOfEvents[0]}
               setEvent1={setEvent1}
