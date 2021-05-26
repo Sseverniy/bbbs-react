@@ -24,6 +24,11 @@ function Header({ toggleModal, loggedIn }) {
       setSearchButton(false);
     }
   };
+  // убираем меню при откртом бургер-меню
+  const hendleIconProfileClick = () => {
+    setBurgerWrap(true);
+    setBurgerClick(false);
+  };
 
   const hendleSearchButton = (e) => {
     e.preventDefault();
@@ -56,7 +61,7 @@ function Header({ toggleModal, loggedIn }) {
 
   return (
     <header
-      className={`header ${burgerClick === true ? 'heder_displayed' : ''} page__section ${
+      className={`header ${burgerClick === true ? 'header_displayed' : ''} page__section ${
         viewHeader === true ? 'header_view' : ''
       }`}
     >
@@ -154,15 +159,39 @@ function Header({ toggleModal, loggedIn }) {
             </form>
           </li>
           <li className='menu__button-item'>
-            <button
+            {loggedIn ? (
+              <NavLink
+                exact
+                to='/profile'
+                target='_self'
+                className='menu__button_type_link-active'
+                onClick={hendleIconProfileClick}
+              >
+                <button
+                  type='button'
+                  aria-label='Личный кабинет'
+                  title='Личный кабинет'
+                  className='menu__button menu__button_type_active-user'
+                />
+              </NavLink>
+            ) : (
+              <button
+                className={`menu__button ${loggedIn ? 'menu__button_type_active-user' : ' menu__button_type_user'}`}
+                onClick={toggleModal}
+                type='button'
+                aria-label='Личный кабинет'
+                title='Личный кабинет'
+              />
+            )}
+            {/* <button
               className={`menu__button ${
-                loggedIn === true ? 'menu__button_type_active-user' : ' menu__button_type_user'
+                loggedIn ? 'menu__button_type_active-user' : ' menu__button_type_user'
               }`}
               onClick={toggleModal}
               type='button'
               aria-label='Личный кабинет'
               title='Личный кабинет'
-            />
+            /> */}
           </li>
         </ul>
       </nav>
