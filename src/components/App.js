@@ -14,7 +14,7 @@ import CalendarConfirmPopup from './CalendarConfirmPopup';
 import CalendarCaptionPopup from './CalendarCaptionPopup';
 import CalendarDonePopup from './CalendarDonePopup';
 import CitiesPopup from './CitiesPopup';
-import { getInfoProfileUsers, authorize, getListCities, getHomePage, getListEvents } from '../utils/api';
+import { getInfoProfileUsers, authorize, getListCities, getHomePage, getListEvents, signUpForEvent, signOutFromEvent } from '../utils/api';
 
 function App() {
   // пока захардкодим, чтобы тестировать
@@ -71,11 +71,24 @@ function App() {
     }
     setIsConfirmPopupOpen(!isConfirmPopupOpen);
   }
-  function toggleModalDone() {
+  function toggleModalDone(currentEvent) {
     if (isConfirmPopupOpen) {
       toggleModalConfirm();
+    } else if (!currentEvent.booked) {
+      signUpForEvent(currentEvent)
+        .then(() => {
+          setIsDonePopupOpen(!isDonePopupOpen);
+          console.log('Вы успешно записались на мероприятие');
+        })
+        .catch((err) => console.log(`Возникла ошибка ${err.message} при попытке записаться на мероприятие`));
+    } else {
+      signOutFromEvent(currentEvent)
+      .then(()=>{
+        console.log('Вы успешно отменили запись');
+        setIsDonePopupOpen(!isDonePopupOpen);
+      })
+      .catch((err) => console.log(`Возникла ошибка ${err.message} при попытке отменить запись`));
     }
-    setIsDonePopupOpen(!isDonePopupOpen);
   }
 
   function handleTokenCheck(access) {
