@@ -1,0 +1,15 @@
+.main {
+  padding-bottom: 160px;
+}
+
+@include atDesktop1024 {
+  .main {
+    padding-bottom: 130px;
+  }
+}
+
+@include atMobile {
+  .main {
+    padding-bottom: 50px;
+  }
+}
