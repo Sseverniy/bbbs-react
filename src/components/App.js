@@ -14,7 +14,15 @@ import CalendarConfirmPopup from './CalendarConfirmPopup';
 import CalendarCaptionPopup from './CalendarCaptionPopup';
 import CalendarDonePopup from './CalendarDonePopup';
 import CitiesPopup from './CitiesPopup';
-import { getInfoProfileUsers, authorize, getListCities, getHomePage, getListEvents, signUpForEvent, signOutFromEvent } from '../utils/api';
+import {
+  getInfoProfileUsers,
+  authorize,
+  getListCities,
+  getHomePage,
+  getListEvents,
+  signUpForEvent,
+  signOutFromEvent,
+} from '../utils/api';
 
 function App() {
   // пока захардкодим, чтобы тестировать
@@ -84,11 +92,11 @@ function App() {
         .catch((err) => console.log(`Возникла ошибка ${err.message} при попытке записаться на мероприятие`));
     } else {
       signOutFromEvent(currentEvent)
-      .then(()=>{
-        console.log('Вы успешно отменили запись');
-        setIsDonePopupOpen(!isDonePopupOpen);
-      })
-      .catch((err) => console.log(`Возникла ошибка ${err.message} при попытке отменить запись`));
+        .then(() => {
+          console.log('Вы успешно отменили запись');
+          setIsDonePopupOpen(!isDonePopupOpen);
+        })
+        .catch((err) => console.log(`Возникла ошибка ${err.message} при попытке отменить запись`));
     }
   }
 
@@ -110,7 +118,7 @@ function App() {
       .then((data) => {
         if (data.data.access) {
           setLoggedIn(true);
-          localStorage.setItem('access', data.access);
+          localStorage.setItem('access', data.data.access);
         }
       })
       .catch((err) => {
@@ -118,7 +126,7 @@ function App() {
       });
   };
 
-  const hendleSignOut = () => {
+  const handleSignOut = () => {
     localStorage.removeItem('access');
     window.location.reload();
     history.push('/');
@@ -179,7 +187,7 @@ function App() {
 
   return (
     <>
-      <Header toggleModal={toggleModalLogin} loggedIn={loggedIn} />
+      <Header toggleModal={toggleModalLogin} loggedIn={loggedIn} onSignOut={handleSignOut} />
       <div className='main'>
         <Switch>
           <Route exact path='/'>
@@ -207,7 +215,7 @@ function App() {
           <Route exact path='/about'>
             <About />
           </Route>
-          <ProtectedRoute exact path='/profile' loggedIn={loggedIn} isLogOut={hendleSignOut} component={PersonalArea} />
+          <ProtectedRoute exact path='/profile' loggedIn={loggedIn} component={PersonalArea} />
         </Switch>
       </div>
       <Footer />
