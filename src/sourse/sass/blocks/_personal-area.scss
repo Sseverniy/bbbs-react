@@ -6,6 +6,7 @@
   display: flex;
   justify-content: flex-end;
   align-items: flex-end;
+  margin-top: 35px;
 }
 
 .personal-area__user-link {
@@ -45,6 +46,12 @@
   }
 }
 
+.personal-area__button-top {
+  border: none;
+  background: $background;
+  cursor: pointer;
+  padding: 0;
+}
 
 // пустая форма
 .personal-area__add-photo-button {
@@ -98,8 +105,8 @@
     resize: none;
   }
 
-  &[type="date"]:not(:focus):not(.has-value):before {
-    color:$lightGray;
+  &[type='date']:not(:focus):not(.has-value):before {
+    color: $lightGray;
     content: attr(placeholder);
   }
 }
@@ -237,7 +244,6 @@
   color: $lightGray;
 }
 
-
 @include atDesktop1024 {
   .personal-area__user-info {
     display: none;
@@ -304,6 +310,4 @@
   .personal-area__button {
     margin: 0;
   }
-
-
 }

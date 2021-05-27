@@ -2,10 +2,10 @@
   transition: 0.3s linear;
   box-sizing: border-box;
   position: fixed;
-  width: 100%;
+  width: 1920px;
   top: 0;
   padding-top: 47px;
-  padding-bottom: 45px;
+  padding-bottom: 20px;
   border-radius: 0 0 30px 30px;
   background-color: $background;
   z-index: 10;
@@ -17,6 +17,12 @@
 }
 .header_view {
   top: -150px;
+}
+
+@include atDesktop1920 {
+  .header {
+    width: 100%;
+  }
 }
 
 @include atDesktop1024 {
