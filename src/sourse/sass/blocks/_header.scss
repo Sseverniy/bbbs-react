@@ -2,21 +2,27 @@
   transition: 0.3s linear;
   box-sizing: border-box;
   position: fixed;
-  width: 100%;
+  width: 1920px;
   top: 0;
   padding-top: 47px;
-  padding-bottom: 65px;
+  padding-bottom: 20px;
   border-radius: 0 0 30px 30px;
   background-color: $background;
   z-index: 10;
 }
 
-.heder_displayed {
+.header_displayed {
   background-color: #fff;
   border-radius: 0px 0px 30px 30px;
 }
 .header_view {
   top: -150px;
+}
+
+@include atDesktop1920 {
+  .header {
+    width: 100%;
+  }
 }
 
 @include atDesktop1024 {
