@@ -14,15 +14,7 @@ import CalendarConfirmPopup from './CalendarConfirmPopup';
 import CalendarCaptionPopup from './CalendarCaptionPopup';
 import CalendarDonePopup from './CalendarDonePopup';
 import CitiesPopup from './CitiesPopup';
-import {
-  getInfoProfileUsers,
-  authorize,
-  getListCities,
-  getHomePage,
-  getListEvents,
-  signUpForEvent,
-  signOutFromEvent,
-} from '../utils/api';
+import { getInfoProfileUsers, authorize, getListCities, getHomePage, getListEvents, signOutFromEvent } from '../utils/api';
 
 function App() {
   // пока захардкодим, чтобы тестировать
@@ -75,29 +67,22 @@ function App() {
     setIsCaptionPopupOpen(!isCaptionPopupOpen);
   }
   function toggleModalConfirm() {
-    if (isCaptionPopupOpen) {
-      toggleModalCaption();
+    if(event1.booked) {
+      signOutFromEvent(event1)
+      .then(()=>{
+        console.log('Вы успешно отменили запись');
+      })
+      .catch((err) => console.log(`Возникла ошибка ${err.message} при попытке отменить запись`))
+    } else {
+      setIsConfirmPopupOpen(!isConfirmPopupOpen);
     }
-    setIsConfirmPopupOpen(!isConfirmPopupOpen);
   }
-  function toggleModalDone(currentEvent) {
+  function toggleModalDone() {
     if (isConfirmPopupOpen) {
       toggleModalConfirm();
-    } else if (!currentEvent.booked) {
-      signUpForEvent(currentEvent)
-        .then(() => {
-          setIsDonePopupOpen(!isDonePopupOpen);
-          console.log('Вы успешно записались на мероприятие');
-        })
-        .catch((err) => console.log(`Возникла ошибка ${err.message} при попытке записаться на мероприятие`));
-    } else {
-      signOutFromEvent(currentEvent)
-        .then(() => {
-          console.log('Вы успешно отменили запись');
-          setIsDonePopupOpen(!isDonePopupOpen);
-        })
-        .catch((err) => console.log(`Возникла ошибка ${err.message} при попытке отменить запись`));
+      toggleModalCaption();
     }
+    setIsDonePopupOpen(!isDonePopupOpen);
   }
 
   function handleTokenCheck(access) {
@@ -210,6 +195,7 @@ function App() {
               sortByMonth={sortByMonth}
               listOfMonths={listOfMonths}
               setEvent1={setEvent1}
+              toggleDone={toggleModalDone}
             />
           </Route>
           <Route exact path='/about'>
@@ -230,7 +216,7 @@ function App() {
       <CalendarConfirmPopup
         toggleModal={toggleModalConfirm}
         isOpen={isConfirmPopupOpen}
-        nextPopup={toggleModalDone}
+        toggleDone={toggleModalDone}
         event1={event1}
       />
       <CalendarDonePopup toggleModal={toggleModalDone} isOpen={isDonePopupOpen} event1={event1} />
