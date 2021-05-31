@@ -3,14 +3,34 @@ import PropTypes from 'prop-types';
 import { format } from 'date-fns';
 import ruLocale from 'date-fns/locale/ru';
 import CalendarParentPopup from './CalendarParentPopup';
+import {signUpForEvent, signOutFromEvent} from '../utils/api';
 
-function CalendarConfirmPopup({ isOpen, toggleModal, nextPopup, event1 }) {
+function CalendarConfirmPopup({ isOpen, toggleModal, toggleDone, event1 }) {
   const [startAt, setStartAt] = useState(new Date(event1.startAt));
   const [endAt, setEndAt] = useState(new Date(event1.endAt));
+
+  function confirmBooking(){
+    if (!event1.booked) {
+      signUpForEvent(event1)
+        .then(() => {
+          toggleDone();
+          console.log('Вы успешно записались на мероприятие');
+        })
+        .catch((err) => console.log(`Возникла ошибка ${err.message} при попытке записаться на мероприятие`));
+    } else {
+      signOutFromEvent(event1)
+      .then(()=>{
+        console.log('Вы успешно отменили запись');
+      })
+      .catch((err) => console.log(`Возникла ошибка ${err.message} при попытке отменить запись`))
+    }
+  }
+
   useEffect(() => {
     setStartAt(new Date(event1.startAt));
     setEndAt(new Date(event1.endAt));
   }, [event1]);
+
   return (
     <CalendarParentPopup isOpen={isOpen} toggleModal={toggleModal}>
       <>
@@ -19,7 +39,7 @@ function CalendarConfirmPopup({ isOpen, toggleModal, nextPopup, event1 }) {
           &nbsp; c {format(startAt, 'hh:mm')}&ndash;{format(endAt, 'hh:mm')}
         </h2>
         <div className='calendar__buttons'>
-          <button className='button button_theme_light calendar__confirm' type='button' onClick={nextPopup}>
+          <button className='button button_theme_light calendar__confirm' type='button' onClick={confirmBooking}>
             Подтвердить запись
           </button>
           <button className='button popup__cancel' type='button' onClick={toggleModal}>
@@ -34,7 +54,7 @@ function CalendarConfirmPopup({ isOpen, toggleModal, nextPopup, event1 }) {
 CalendarConfirmPopup.propTypes = {
   isOpen: PropTypes.bool.isRequired,
   toggleModal: PropTypes.func.isRequired,
-  nextPopup: PropTypes.func.isRequired,
+  toggleDone: PropTypes.func.isRequired,
   event1: PropTypes.shape({
     id: PropTypes.number,
     booked: PropTypes.bool,
