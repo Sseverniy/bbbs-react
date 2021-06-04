@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Helmet } from 'react-helmet';
-import WhereToGo from './WhereToGo';
+import Place from './Place';
 import Movie from './Movie';
 import Meetup from './Meetup';
 import Question from './Question';
@@ -57,7 +57,7 @@ function Main({ loggedIn, history, place, video, movies, questions, toggleModal,
           </article>
         </article>
       </section>
-      <WhereToGo place={place} />
+      <Place place={place} />
       <section className='main-section page__section'>
         <article className='card card_color_blue card_content_quote'>
           <a href='./articles.html' className='card__link-wrap'>
