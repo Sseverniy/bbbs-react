@@ -8,6 +8,7 @@ import Header from './Header';
 import Calendar from './Calendar';
 import Footer from './Footer';
 import About from './About';
+import WhereToGo from './WhereToGo';
 import PersonalArea from './PersonalArea';
 import LoginPopup from './LoginPopup';
 import CalendarConfirmPopup from './CalendarConfirmPopup';
@@ -15,7 +16,14 @@ import CalendarCaptionPopup from './CalendarCaptionPopup';
 import CalendarDonePopup from './CalendarDonePopup';
 import CitiesPopup from './CitiesPopup';
 import Loader from './Loader';
-import { getInfoProfileUsers, authorize, getListCities, getHomePage, getListEvents, signOutFromEvent } from '../utils/api';
+import {
+  getInfoProfileUsers,
+  authorize,
+  getListCities,
+  getHomePage,
+  getListEvents,
+  signOutFromEvent,
+} from '../utils/api';
 
 function App() {
   // пока захардкодим, чтобы тестировать
@@ -214,6 +222,9 @@ function App() {
           </Route>
           <Route exact path='/about'>
             <About />
+          </Route>
+          <Route exact path='/where-to-go'>
+            <WhereToGo place={placeMain} />
           </Route>
           <ProtectedRoute exact path='/profile' loggedIn={loggedIn} component={PersonalArea} />
         </Switch>
