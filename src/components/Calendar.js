@@ -6,8 +6,7 @@ import ruLocale from 'date-fns/locale/ru';
 import Meetup from './Meetup';
 import Title from './Title';
 
-
-function Calendar({toggleModal,events, sortByMonth, listOfMonths, setEvent1, toggleDone}) {
+function Calendar({ toggleModal, events, sortByMonth, listOfMonths, setEvent1, toggleDone }) {
   // const [selectedMonths, setSelectedMonths] = useState(['май','июнь','июль']);
 
   function getUniqueMonths() {
@@ -29,6 +28,12 @@ function Calendar({toggleModal,events, sortByMonth, listOfMonths, setEvent1, tog
         <meta name='keywords' content='Календарь, мероприятия, события' />
       </Helmet>
       <section className='lead page__section'>
+        <div className='personal-area__user-info'>
+          <p className='paragraph personal-area__user-link personal-area__user-link_type_city'>{`Москва. `}</p>
+          <button type='button' className='paragraph personal-area__user-link personal-area__button-top'>
+            Изменить город
+          </button>
+        </div>
         <h1 className='main-title'>Календарь</h1>
         <div className='tags'>
           <ul className='tags__list'>
@@ -38,8 +43,16 @@ function Calendar({toggleModal,events, sortByMonth, listOfMonths, setEvent1, tog
           </ul>
         </div>
       </section>
-      <section className="calendar-container page__section">
-        {listOfMonths.map((event) => <Meetup toggleModal={toggleModal} event1={event} key={event.id} setEvent1={setEvent1} toggleDone={toggleDone}/>)}
+      <section className='calendar-container page__section'>
+        {listOfMonths.map((event) => (
+          <Meetup
+            toggleModal={toggleModal}
+            event1={event}
+            key={event.id}
+            setEvent1={setEvent1}
+            toggleDone={toggleDone}
+          />
+        ))}
       </section>
     </>
   );

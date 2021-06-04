@@ -16,7 +16,7 @@ function PersonalArea() {
         <p className='paragraph personal-area__user-link personal-area__user-link_type_city'>{`Москва. `}</p>
         <button
           type='button'
-          className='paragraph personal-area__user-link personal-area__user-link_type_exit personal-area__button-top'
+          className='paragraph personal-area__user-link  personal-area__button-top'
         >
           Изменить город
         </button>
@@ -24,6 +24,14 @@ function PersonalArea() {
           type='button'
           className='paragraph personal-area__user-link personal-area__user-link_type_exit personal-area__button-top'
           onClick={isLogOut}
+        >
+          Выйти
+        </button>
+      </div> */}
+      {/* <div className='personal-area__user-info'>
+        <button
+          type='button'
+          className='paragraph personal-area__user-link  personal-area__button-top'
         >
           Выйти
         </button>

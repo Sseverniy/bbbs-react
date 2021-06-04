@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { withRouter, Switch, Route, useHistory } from 'react-router-dom';
+import { withRouter, Switch, Route, useHistory, useLocation } from 'react-router-dom';
 import { format } from 'date-fns';
 import ruLocale from 'date-fns/locale/ru';
 import ProtectedRoute from './ProtectedRoute';
@@ -29,7 +29,7 @@ function App() {
   // const token =
   //   'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjIwNTM4OTMzLCJqdGkiOiIwOWZlNWUxNmI1MjI0YmM3ODJiYTc1YmM1OWExZWUzZSIsInVzZXJfaWQiOjF9._cDyG8Vp2HWzPPp-Hrm-P5FD5P0zcywVd4o4Gt2FL2M';
   // localStorage.setItem('access', token);
-
+  const { pathname } = useLocation();
   const [loggedIn, setLoggedIn] = useState(false);
   const [isCitiesPopupOpen, setCitiesPopupOpen] = useState(false);
   const [isLoginPopupOpen, setIsLoginPopupOpen] = useState(false);
@@ -97,7 +97,7 @@ function App() {
     getInfoProfileUsers(access)
       .then(({ data }) => {
         if (data) {
-          setLoggedIn(false);
+          setLoggedIn(true);
         }
       })
       .catch((err) => {
@@ -180,7 +180,7 @@ function App() {
 
   return (
     <>
-      <Header toggleModal={toggleModalLogin} loggedIn={loggedIn} onSignOut={handleSignOut} />
+      <Header toggleModal={toggleModalLogin} loggedIn={loggedIn} onSignOut={handleSignOut} location={pathname} />
       <div className='main'>
         <Switch>
           <Route exact path='/'>

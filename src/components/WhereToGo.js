@@ -5,6 +5,12 @@ import Place from './Place';
 function WhereToGo({ place }) {
   return (
     <section className='lead page__section'>
+      <div className='personal-area__user-info'>
+        <p className='paragraph personal-area__user-link personal-area__user-link_type_city'>{`Москва. `}</p>
+        <button type='button' className='paragraph personal-area__user-link personal-area__button-top'>
+          Изменить город
+        </button>
+      </div>
       <h1 className='main-title'>Куда пойти</h1>
       <div className='tags'>
         <ul className='tags__list'>

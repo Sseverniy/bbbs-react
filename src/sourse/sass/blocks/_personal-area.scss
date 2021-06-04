@@ -6,7 +6,10 @@
   display: flex;
   justify-content: flex-end;
   align-items: flex-end;
-  margin-top: 35px;
+  // margin-top: 35px;
+  // &_tablet-active {
+  //   display: none;
+  // }
 }
 
 .personal-area__user-link {
@@ -16,6 +19,9 @@
 
   &:first-of-type {
     margin-left: 0;
+  }
+  &_type_exit {
+    margin-top: 35px;
   }
 }
 
@@ -245,10 +251,6 @@
 }
 
 @include atDesktop1024 {
-  .personal-area__user-info {
-    display: none;
-  }
-
   .personal-area__sign-up {
     padding-top: 20px;
     padding-bottom: 20px;
@@ -310,4 +312,13 @@
   .personal-area__button {
     margin: 0;
   }
+}
+
+@include atTablet {
+  .personal-area__user-info {
+    display: none;
+  }
+  // .personal-area__user-info_tablet-active {
+  //   display: flex;
+  // }
 }

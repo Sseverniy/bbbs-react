@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import NavBar from './NavBar';
 import SearchResponse from './SearchResponse';
 
-function Header({ toggleModal, loggedIn, onSignOut }) {
+function Header({ toggleModal, loggedIn, location }) {
   const [burgerClick, setBurgerClick] = useState(false);
   const [burgerWrap, setBurgerWrap] = useState(true);
   const [menuListHidden, setMenuListHidden] = useState(true);
@@ -153,21 +153,30 @@ function Header({ toggleModal, loggedIn, onSignOut }) {
               />
             )}
           </li>
+          {loggedIn ? (
+            <div className='personal-area__user-info personal-area__user-info_tablet-active'>
+              <p className='paragraph personal-area__user-link personal-area__user-link_type_city'>{`Москва. `}</p>
+              <button type='button' className='paragraph personal-area__user-link  personal-area__button-top'>
+                Изменить город
+              </button>
+              <button
+                type='button'
+                className='paragraph personal-area__user-link personal-area__user-link_type_exit personal-area__button-top'
+              >
+                Выйти
+              </button>
+            </div>
+          ) : (
+            ''
+          )}
         </ul>
       </nav>
-      {loggedIn ? (
+
+      {location === '/profile' ? (
         <div className='personal-area__user-info'>
-          <p className='paragraph personal-area__user-link personal-area__user-link_type_city'>{`Москва. `}</p>
           <button
             type='button'
             className='paragraph personal-area__user-link personal-area__user-link_type_exit personal-area__button-top'
-          >
-            Изменить город
-          </button>
-          <button
-            type='button'
-            className='paragraph personal-area__user-link personal-area__user-link_type_exit personal-area__button-top'
-            onClick={onSignOut}
           >
             Выйти
           </button>
@@ -181,7 +190,7 @@ function Header({ toggleModal, loggedIn, onSignOut }) {
 Header.propTypes = {
   toggleModal: PropTypes.func.isRequired,
   loggedIn: PropTypes.bool.isRequired,
-  onSignOut: PropTypes.func.isRequired,
+  location: PropTypes.bool.isRequired,
 };
 
 export default Header;
