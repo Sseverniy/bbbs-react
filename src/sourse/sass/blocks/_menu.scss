@@ -12,7 +12,7 @@
   line-height: 1.1;
   color: $blue;
   text-decoration: none;
-  transition: .2s linear;
+  transition: 0.2s linear;
 
   &:hover {
     color: $darkBlue;
@@ -32,26 +32,29 @@
   }
 }
 
+.menu__link {
+  font-family: $protoGrotesk;
+  font-size: 14px;
+  line-height: 1.25;
+  letter-spacing: 0.2px;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: $black;
+  transition: 0.2s linear;
+
+  &:hover {
+    color: $blue;
+  }
+}
+
 .menu__list-item {
   margin-left: 30px;
 
   &:first-of-type {
     margin-left: 0;
   }
-}
-
-.menu__link {
-  font-family: $protoGrotesk;
-  font-size: 14px;
-  line-height: 1.25;
-  letter-spacing: .2px;
-  text-transform: uppercase;
-  text-decoration: none;
-  color: $black;
-  transition: .2s linear;
-
-  &:hover {
-    color: $blue;
+  &_active {
+    color: #224cff;
   }
 }
 
@@ -69,7 +72,7 @@
   border-radius: 0px 0px 30px 30px;
   box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.1);
   list-style-type: none;
-  transition: .2s ease;
+  transition: 0.2s ease;
   z-index: 1;
 }
 
@@ -83,7 +86,7 @@
 
 .menu__dropdown-link {
   color: $black;
-  transition: .2s linear;
+  transition: 0.2s linear;
 
   &:hover {
     color: $blue;
@@ -93,7 +96,7 @@
 .menu__dropdown-item {
   position: relative;
 
-  &:hover .menu__dropdown-list{
+  &:hover .menu__dropdown-list {
     visibility: visible;
     opacity: 1;
   }
@@ -119,7 +122,7 @@
 }
 
 .menu__button-item {
-  transition: .15s ease-in;
+  transition: 0.15s ease-in;
 
   &:first-of-type {
     padding-right: 20px;
@@ -128,7 +131,7 @@
   &:last-of-type {
     height: 20px;
     padding-left: 20px;
-    border-left: .7px solid $lightGray;
+    border-left: 0.7px solid $lightGray;
   }
 }
 
@@ -155,6 +158,9 @@
 
   &_type_active-user {
     background-image: url('../images/svg/user-active.svg');
+  }
+  &_type_link-active {
+    padding-top: 5px;
   }
 }
 
@@ -190,7 +196,6 @@
     }
   }
 }
-
 
 @include atDesktop1380 {
   .menu {
@@ -242,7 +247,7 @@
     width: 20px;
     height: 1px;
     background-color: $black;
-    transition: .4s linear;
+    transition: 0.4s linear;
     &:last-of-type {
       margin: 0;
     }
@@ -282,7 +287,6 @@
     display: flex;
     justify-content: space-between;
 
-
     &_hidden {
       display: none;
     }
@@ -309,7 +313,7 @@
   }
 
   .menu__dropdown-item {
-    &:hover .menu__dropdown-list{
+    &:hover .menu__dropdown-list {
       display: none;
     }
   }
@@ -326,7 +330,7 @@
   .menu__user-link {
     color: $lightGray;
     text-decoration: none;
-    transition: .2s linear;
+    transition: 0.2s linear;
 
     &:hover {
       color: $darkGray;

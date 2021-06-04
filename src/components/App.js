@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { withRouter, Switch, Route } from 'react-router-dom';
+import { withRouter, Switch, Route, useHistory } from 'react-router-dom';
 import { format } from 'date-fns';
 import ruLocale from 'date-fns/locale/ru';
 import ProtectedRoute from './ProtectedRoute';
@@ -42,6 +42,7 @@ function App() {
   const [videoMain, setVideoMain] = useState({});
   const [moviesMain, setMoviesMain] = useState([]);
   const [questionsMain, setQuestionsMain] = useState([]);
+  const history = useHistory();
   const [event1, setEvent1] = useState({
     id: 1,
     booked: true,
@@ -114,13 +115,19 @@ function App() {
       .then((data) => {
         if (data.data.access) {
           setLoggedIn(true);
-          localStorage.setItem('access', data.access);
+          localStorage.setItem('access', data.data.access);
         }
       })
       .catch((err) => {
         console.log(err);
       })
       .finally(()=> renderLoader(false));
+  };
+
+  const handleSignOut = () => {
+    localStorage.removeItem('access');
+    window.location.reload();
+    history.push('/');
   };
 
   const handleGetMain = () => {
@@ -178,7 +185,7 @@ function App() {
 
   return (
     <>
-      <Header toggleModal={toggleModalLogin} loggedIn={loggedIn} />
+      <Header toggleModal={toggleModalLogin} loggedIn={loggedIn} onSignOut={handleSignOut} />
       <div className='main'>
         <Switch>
           <Route exact path='/'>

@@ -1,12 +1,17 @@
 // Названия миксинов соответствуют контрольным точкам в макете
 
-//для экранов до 1640px (для прав детей)
+//для экранов до 1920px (для прав детей)
+@mixin atDesktop1920 {
+  @media screen and (max-width: 1920px) {
+    @content;
+  }
+}
+
 @mixin atDesktop1639 {
   @media screen and (max-width: 1639px) {
     @content;
   }
 }
-
 //для экранов до 1450px
 @mixin atDesktop1440 {
   @media screen and (max-width: 1450px) {
@@ -27,7 +32,6 @@
     @content;
   }
 }
-
 
 //для экранов до 1280px (для футера)
 @mixin atDesktop1279 {
