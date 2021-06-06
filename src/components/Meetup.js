@@ -4,7 +4,7 @@ import { format } from 'date-fns';
 import ruLocale from 'date-fns/locale/ru';
 import {signUpForEvent, signOutFromEvent} from '../utils/api';
 
-function Meetup({ toggleModal, event1, setEvent1, toggleDone }) {
+function Meetup({ toggleModal, event1, setEvent1, toggleDone, loader }) {
   const [startAt] = useState(new Date(event1.startAt));
   const [endAt] = useState(new Date(event1.endAt));
 
@@ -15,18 +15,22 @@ function Meetup({ toggleModal, event1, setEvent1, toggleDone }) {
 
   function bookEvent() {
     if (!event1.booked) {
+      loader(true);
       signUpForEvent(event1)
         .then(() => {
           toggleDone();
           console.log('Вы успешно записались на мероприятие');
         })
-        .catch((err) => console.log(`Возникла ошибка ${err.message} при попытке записаться на мероприятие`));
+        .catch((err) => console.log(`Возникла ошибка ${err.message} при попытке записаться на мероприятие`))
+        .finally(() => loader(false));
     } else {
+      loader(true);
       signOutFromEvent(event1)
       .then(()=>{
         console.log('Вы успешно отменили запись');
       })
       .catch((err) => console.log(`Возникла ошибка ${err.message} при попытке отменить запись`))
+      .finally(() => loader(false));
     }
   }
 
@@ -95,6 +99,7 @@ Meetup.propTypes = {
     })
   .isRequired,
   toggleDone: PropTypes.func.isRequired,
+  loader: PropTypes.func.isRequired,
 };
 
 export default Meetup;

@@ -7,7 +7,7 @@ import Meetup from './Meetup';
 import Title from './Title';
 
 
-function Calendar({toggleModal,events, sortByMonth, listOfMonths, setEvent1, toggleDone}) {
+function Calendar({toggleModal,events, sortByMonth, listOfMonths, setEvent1, toggleDone, loader}) {
   // const [selectedMonths, setSelectedMonths] = useState(['май','июнь','июль']);
 
   function getUniqueMonths() {
@@ -39,7 +39,7 @@ function Calendar({toggleModal,events, sortByMonth, listOfMonths, setEvent1, tog
         </div>
       </section>
       <section className="calendar-container page__section">
-        {listOfMonths.map((event) => <Meetup toggleModal={toggleModal} event1={event} key={event.id} setEvent1={setEvent1} toggleDone={toggleDone}/>)}
+        {listOfMonths.map((event) => <Meetup toggleModal={toggleModal} event1={event} key={event.id} setEvent1={setEvent1} toggleDone={toggleDone} loader={loader}/>)}
       </section>
     </>
   );
@@ -79,6 +79,7 @@ Calendar.propTypes = {
     })
   ).isRequired,
   toggleDone: PropTypes.func.isRequired,
+  loader: PropTypes.func.isRequired,
 };
 
 export default Calendar;

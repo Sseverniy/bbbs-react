@@ -15,6 +15,7 @@ import CalendarConfirmPopup from './CalendarConfirmPopup';
 import CalendarCaptionPopup from './CalendarCaptionPopup';
 import CalendarDonePopup from './CalendarDonePopup';
 import CitiesPopup from './CitiesPopup';
+import Loader from './Loader';
 import {
   getInfoProfileUsers,
   authorize,
@@ -33,6 +34,8 @@ function App() {
   const [loggedIn, setLoggedIn] = useState(false);
   const [isCitiesPopupOpen, setCitiesPopupOpen] = useState(false);
   const [isLoginPopupOpen, setIsLoginPopupOpen] = useState(false);
+
+  const [isLoading, setIsLoading] = useState(false);
   // попапы календаря
   const [isCaptionPopupOpen, setIsCaptionPopupOpen] = useState(false);
   const [isConfirmPopupOpen, setIsConfirmPopupOpen] = useState(false);
@@ -63,6 +66,10 @@ function App() {
     city: 1,
   });
 
+  function renderLoader(option) {
+    setIsLoading(option);
+  }
+
   function toggleModalCities() {
     setCitiesPopupOpen(!isCitiesPopupOpen);
   }
@@ -75,12 +82,14 @@ function App() {
     setIsCaptionPopupOpen(!isCaptionPopupOpen);
   }
   function toggleModalConfirm() {
-    if (event1.booked) {
+    if(event1.booked) {
+      renderLoader(true);
       signOutFromEvent(event1)
-        .then(() => {
-          console.log('Вы успешно отменили запись');
-        })
-        .catch((err) => console.log(`Возникла ошибка ${err.message} при попытке отменить запись`));
+      .then(()=>{
+        console.log('Вы успешно отменили запись');
+      })
+      .catch((err) => console.log(`Возникла ошибка ${err.message} при попытке отменить запись`))
+      .finally(()=> renderLoader(false));
     } else {
       setIsConfirmPopupOpen(!isConfirmPopupOpen);
     }
@@ -94,6 +103,7 @@ function App() {
   }
 
   function handleTokenCheck(access) {
+    renderLoader(true);
     getInfoProfileUsers(access)
       .then(({ data }) => {
         if (data) {
@@ -102,11 +112,13 @@ function App() {
       })
       .catch((err) => {
         console.log(err);
-      });
+      })
+      .finally(()=> renderLoader(false));
   }
 
   const handleLogin = (dataInput) => {
     const { login, password } = dataInput;
+    renderLoader(true);
     return authorize(login, password)
       .then((data) => {
         if (data.data.access) {
@@ -116,7 +128,8 @@ function App() {
       })
       .catch((err) => {
         console.log(err);
-      });
+      })
+      .finally(()=> renderLoader(false));
   };
 
   const handleSignOut = () => {
@@ -204,6 +217,7 @@ function App() {
               listOfMonths={listOfMonths}
               setEvent1={setEvent1}
               toggleDone={toggleModalDone}
+              loader={renderLoader}
             />
           </Route>
           <Route exact path='/about'>
@@ -229,9 +243,11 @@ function App() {
         isOpen={isConfirmPopupOpen}
         toggleDone={toggleModalDone}
         event1={event1}
+        loader={renderLoader}
       />
       <CalendarDonePopup toggleModal={toggleModalDone} isOpen={isDonePopupOpen} event1={event1} />
       <CitiesPopup toggleModal={toggleModalCities} cities={listOfCities} isOpen={isCitiesPopupOpen} />
+      <Loader isLoading={isLoading}/>
     </>
   );
 }
