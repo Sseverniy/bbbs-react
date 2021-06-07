@@ -111,6 +111,10 @@ function App() {
     history.push('/');
   };
 
+  // useEffect(() => {
+  //   hendleSignOut();
+  // }, [hendleSignOut]);
+
   const handleGetMain = () => {
     getHomePage().then((data) => {
       setHistoryMain(data.data.history);
