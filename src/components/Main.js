@@ -7,16 +7,7 @@ import Meetup from './Meetup';
 import Question from './Question';
 import calendarLogo from '../sourse/sass/images/svg/calendar_logo.svg';
 
-function Main({ loggedIn, history, place, video, movies, questions, toggleModal, event, setEvent1, loader }) {
-  const secondsToHM = (time) => {
-    const h = Math.floor(time / 60);
-    const m = Math.floor(time % 60);
-
-    const hDisplay = h > 0 ? `${h}ч ` : '';
-    const mDisplay = m > 0 ? `${m}м ` : '';
-
-    return hDisplay + mDisplay;
-  };
+function Main({ loggedIn, history, place, video, movies, questions, toggleModal, event, setEvent1, loader, secondsToHM }) {
 
   return (
     <>
@@ -179,6 +170,7 @@ Main.propTypes = {
   }).isRequired,
   setEvent1: PropTypes.func.isRequired,
   loader: PropTypes.func.isRequired,
+  secondsToHM: PropTypes.func.isRequired,
 };
 
 export default Main;
