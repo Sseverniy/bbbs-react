@@ -42,7 +42,7 @@ function Calendar({toggleModal, events, sortByMonth, listOfMonths, setEvent1, to
         </div>
       </section>
       <section className="calendar-container page__section">
-        {listOfMonths.map((event) => <Meetup toggleModal={toggleModal} event1={event} key={event.id} setEvent1={setEvent1} toggleDone={toggleDone} loader={loader}/>)}
+        {loggedIn && listOfMonths.map((event) => <Meetup toggleModal={toggleModal} event1={event} key={event.id} setEvent1={setEvent1} toggleDone={toggleDone} loader={loader}/>)}
       </section>
     </>
   );
