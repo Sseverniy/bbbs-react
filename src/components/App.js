@@ -161,6 +161,15 @@ function App() {
     });
     setListOfMonths(newData);
   }
+  const secondsToHM = (time) => {
+    const h = Math.floor(time / 60);
+    const m = Math.floor(time % 60);
+
+    const hDisplay = h > 0 ? `${h}ч ` : '';
+    const mDisplay = m > 0 ? `${m}м ` : '';
+
+    return hDisplay + mDisplay;
+  };
 
   useEffect(() => {
     const access = localStorage.getItem('access');
@@ -208,6 +217,7 @@ function App() {
               event={listOfEvents[0]}
               setEvent1={setEvent1}
               loader={renderLoader}
+              secondsToHM={secondsToHM}
             />
           </Route>
           <Route exact path='/calendar'>
