@@ -7,8 +7,7 @@ import Meetup from './Meetup';
 import Title from './Title';
 
 
-function Calendar({toggleModal,events, sortByMonth, listOfMonths, setEvent1, toggleDone, loader}) {
-  // const [selectedMonths, setSelectedMonths] = useState(['май','июнь','июль']);
+function Calendar({toggleModal, events, sortByMonth, listOfMonths, setEvent1, toggleDone, loader, loggedIn, toggleLogin}) {
 
   function getUniqueMonths() {
     // функция, которая перебирает события и возвращает массив с названиями месяцев
@@ -20,6 +19,10 @@ function Calendar({toggleModal,events, sortByMonth, listOfMonths, setEvent1, tog
     return Array.from(new Set(monthArray));
   }
   const uniqueMonths = getUniqueMonths();
+
+  React.useEffect(()=>{
+    toggleLogin();
+  }, [loggedIn]);
 
   return (
     <>
@@ -80,6 +83,8 @@ Calendar.propTypes = {
   ).isRequired,
   toggleDone: PropTypes.func.isRequired,
   loader: PropTypes.func.isRequired,
+  loggedIn: PropTypes.bool.isRequired,
+  toggleLogin: PropTypes.func.isRequired,
 };
 
 export default Calendar;

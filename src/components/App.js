@@ -219,6 +219,8 @@ function App() {
               setEvent1={setEvent1}
               toggleDone={toggleModalDone}
               loader={renderLoader}
+              toggleLogin={toggleModalLogin}
+              loggedIn={loggedIn}
             />
           </Route>
           <Route exact path='/about'>
@@ -227,6 +229,14 @@ function App() {
           <Route exact path='/where-to-go'>
             <WhereToGo place={placeMain} />
           </Route>
+          {/* <ProtectedRoute exact path='/calendar' loggedIn={loggedIn} component={Calendar}
+              toggleModal={toggleModalCaption}
+              events={listOfEvents}
+              sortByMonth={sortByMonth}
+              listOfMonths={listOfMonths}
+              setEvent1={setEvent1}
+              toggleDone={toggleModalDone}
+              loader={renderLoader} /> */}
           <ProtectedRoute exact path='/profile' loggedIn={loggedIn} component={PersonalArea} />
         </Switch>
       </div>
