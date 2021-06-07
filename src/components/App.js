@@ -207,6 +207,7 @@ function App() {
               toggleModal={toggleModalCaption}
               event={listOfEvents[0]}
               setEvent1={setEvent1}
+              loader={renderLoader}
             />
           </Route>
           <Route exact path='/calendar'>

@@ -7,7 +7,7 @@ import Meetup from './Meetup';
 import Question from './Question';
 import calendarLogo from '../sourse/sass/images/svg/calendar_logo.svg';
 
-function Main({ loggedIn, history, place, video, movies, questions, toggleModal, event, setEvent1 }) {
+function Main({ loggedIn, history, place, video, movies, questions, toggleModal, event, setEvent1, loader }) {
   const secondsToHM = (time) => {
     const h = Math.floor(time / 60);
     const m = Math.floor(time % 60);
@@ -33,7 +33,7 @@ function Main({ loggedIn, history, place, video, movies, questions, toggleModal,
       <section className='lead page__section'>
         <article className='card-container card-container_type_identical'>
           {loggedIn === true ? (
-            <Meetup event1={event} toggleModal={toggleModal} setEvent1={setEvent1} />
+            <Meetup event1={event} toggleModal={toggleModal} setEvent1={setEvent1} loader={loader}/>
           ) : (
             <article className='card card_color_green stub'>
               <div className='stub__upper-element'>
@@ -178,6 +178,7 @@ Main.propTypes = {
     city: PropTypes.number,
   }).isRequired,
   setEvent1: PropTypes.func.isRequired,
+  loader: PropTypes.func.isRequired,
 };
 
 export default Main;
