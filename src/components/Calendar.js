@@ -7,8 +7,7 @@ import Meetup from './Meetup';
 import Title from './Title';
 
 
-function Calendar({toggleModal,events, sortByMonth, listOfMonths, setEvent1, toggleDone}) {
-  // const [selectedMonths, setSelectedMonths] = useState(['май','июнь','июль']);
+function Calendar({toggleModal, events, sortByMonth, listOfMonths, setEvent1, toggleDone, loader, loggedIn, toggleLogin}) {
 
   function getUniqueMonths() {
     // функция, которая перебирает события и возвращает массив с названиями месяцев
@@ -20,6 +19,10 @@ function Calendar({toggleModal,events, sortByMonth, listOfMonths, setEvent1, tog
     return Array.from(new Set(monthArray));
   }
   const uniqueMonths = getUniqueMonths();
+
+  React.useEffect(()=>{
+    toggleLogin();
+  }, [loggedIn]);
 
   return (
     <>
@@ -39,7 +42,7 @@ function Calendar({toggleModal,events, sortByMonth, listOfMonths, setEvent1, tog
         </div>
       </section>
       <section className="calendar-container page__section">
-        {listOfMonths.map((event) => <Meetup toggleModal={toggleModal} event1={event} key={event.id} setEvent1={setEvent1} toggleDone={toggleDone}/>)}
+        {loggedIn && listOfMonths.map((event) => <Meetup toggleModal={toggleModal} event1={event} key={event.id} setEvent1={setEvent1} toggleDone={toggleDone} loader={loader}/>)}
       </section>
     </>
   );
@@ -79,6 +82,9 @@ Calendar.propTypes = {
     })
   ).isRequired,
   toggleDone: PropTypes.func.isRequired,
+  loader: PropTypes.func.isRequired,
+  loggedIn: PropTypes.bool.isRequired,
+  toggleLogin: PropTypes.func.isRequired,
 };
 
 export default Calendar;

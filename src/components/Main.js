@@ -1,22 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Helmet } from 'react-helmet';
-import WhereToGo from './WhereToGo';
+import Place from './Place';
 import Movie from './Movie';
 import Meetup from './Meetup';
 import Question from './Question';
 import calendarLogo from '../sourse/sass/images/svg/calendar_logo.svg';
 
-function Main({ loggedIn, history, place, video, movies, questions, toggleModal, event, setEvent1 }) {
-  const secondsToHM = (time) => {
-    const h = Math.floor(time / 60);
-    const m = Math.floor(time % 60);
-
-    const hDisplay = h > 0 ? `${h}ч ` : '';
-    const mDisplay = m > 0 ? `${m}м ` : '';
-
-    return hDisplay + mDisplay;
-  };
+function Main({ loggedIn, history, place, video, movies, questions, toggleModal, event, setEvent1, loader, secondsToHM }) {
 
   return (
     <>
@@ -33,7 +24,7 @@ function Main({ loggedIn, history, place, video, movies, questions, toggleModal,
       <section className='lead page__section'>
         <article className='card-container card-container_type_identical'>
           {loggedIn === true ? (
-            <Meetup event1={event} toggleModal={toggleModal} setEvent1={setEvent1} />
+            <Meetup event1={event} toggleModal={toggleModal} setEvent1={setEvent1} loader={loader}/>
           ) : (
             <article className='card card_color_green stub'>
               <div className='stub__upper-element'>
@@ -57,7 +48,7 @@ function Main({ loggedIn, history, place, video, movies, questions, toggleModal,
           </article>
         </article>
       </section>
-      <WhereToGo place={place} />
+      <Place place={place} />
       <section className='main-section page__section'>
         <article className='card card_color_blue card_content_quote'>
           <a href='./articles.html' className='card__link-wrap'>
@@ -178,6 +169,8 @@ Main.propTypes = {
     city: PropTypes.number,
   }).isRequired,
   setEvent1: PropTypes.func.isRequired,
+  loader: PropTypes.func.isRequired,
+  secondsToHM: PropTypes.func.isRequired,
 };
 
 export default Main;
