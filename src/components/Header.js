@@ -4,12 +4,41 @@ import PropTypes from 'prop-types';
 import NavBar from './NavBar';
 import SearchResponse from './SearchResponse';
 
-function Header({ toggleModal, loggedIn, onSignOut }) {
+function Header({ toggleModal, loggedIn, onSignOut, location }) {
   const [burgerClick, setBurgerClick] = useState(false);
   const [burgerWrap, setBurgerWrap] = useState(true);
   const [menuListHidden, setMenuListHidden] = useState(true);
   const [searchButton, setSearchButton] = useState(false);
   const [viewHeader, setViewHeader] = useState(false);
+
+  const myCitie = (
+    <div className='personal-area__user-info'>
+      <p className='paragraph personal-area__user-link personal-area__user-link_type_city'>{`Москва. `}</p>
+      <button
+        type='button'
+        className='paragraph personal-area__user-link personal-area__user-link_type_exit personal-area__button-top'
+      >
+        Изменить город
+      </button>
+    </div>
+  );
+
+  const locationCalendar = () => {
+    if (loggedIn) {
+      if (location === '/calendar') {
+        return myCitie;
+      }
+    }
+    return '';
+  };
+  const locationWhereToGo = () => {
+    if (loggedIn) {
+      if (location === '/where-to-go') {
+        return myCitie;
+      }
+    }
+    return '';
+  };
 
   let prevScrollpos = window.pageYOffset;
 
@@ -71,7 +100,7 @@ function Header({ toggleModal, loggedIn, onSignOut }) {
           наставники.про
         </NavLink>
         <div className={`menu__lists-wrap ${burgerWrap === true ? 'menu__lists-wrap_hidden' : ''}`}>
-          <NavBar />
+          <NavBar loggedIn={loggedIn} location={location} />
           <ul className={`menu__list menu__list_type_social ${menuListHidden === true ? 'menu__list_hidden' : ''}`}>
             <li className='menu__list-item'>
               <a href='https://www.facebook.com/BigBrothers.BigSisters.Russia/' className='menu__link'>
@@ -93,6 +122,19 @@ function Header({ toggleModal, loggedIn, onSignOut }) {
                 youtube
               </a>
             </li>
+            {loggedIn ? (
+              <li className='menu__list-item menu__list-item-active'>
+                <button
+                  type='button'
+                  className='paragraph personal-area__user-link personal-area__user-link_type_exit personal-area__button-top'
+                  onClick={onSignOut}
+                >
+                  Выйти
+                </button>
+              </li>
+            ) : (
+              ''
+            )}
           </ul>
         </div>
 
@@ -155,15 +197,8 @@ function Header({ toggleModal, loggedIn, onSignOut }) {
           </li>
         </ul>
       </nav>
-      {loggedIn ? (
+      {location === '/profile' ? (
         <div className='personal-area__user-info'>
-          <p className='paragraph personal-area__user-link personal-area__user-link_type_city'>{`Москва. `}</p>
-          <button
-            type='button'
-            className='paragraph personal-area__user-link personal-area__user-link_type_exit personal-area__button-top'
-          >
-            Изменить город
-          </button>
           <button
             type='button'
             className='paragraph personal-area__user-link personal-area__user-link_type_exit personal-area__button-top'
@@ -175,6 +210,8 @@ function Header({ toggleModal, loggedIn, onSignOut }) {
       ) : (
         ''
       )}
+      {locationCalendar()}
+      {locationWhereToGo()}
     </header>
   );
 }
@@ -182,6 +219,7 @@ Header.propTypes = {
   toggleModal: PropTypes.func.isRequired,
   loggedIn: PropTypes.bool.isRequired,
   onSignOut: PropTypes.func.isRequired,
+  location: PropTypes.string.isRequired,
 };
 
 export default Header;

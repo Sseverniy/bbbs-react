@@ -1,7 +1,39 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
-function NavBar() {
+function NavBar({ loggedIn, location }) {
+  const myCitieWrap = (
+    <li className='menu__list-item'>
+      <div className='personal-area__user-info-wrap'>
+        <p className='paragraph personal-area__user-link personal-area__user-link_type_city'>{`Москва. `}</p>
+        <button
+          type='button'
+          className='paragraph personal-area__user-link personal-area__user-link_type_exit personal-area__button-top'
+        >
+          Изменить город
+        </button>
+      </div>
+    </li>
+  );
+
+  const locationCalendarWrap = () => {
+    if (loggedIn) {
+      if (location === '/calendar') {
+        return myCitieWrap;
+      }
+    }
+    return '';
+  };
+  const locationWhereToGoWrap = () => {
+    if (loggedIn) {
+      if (location === '/where-to-go') {
+        return myCitieWrap;
+      }
+    }
+    return '';
+  };
+
   return (
     <ul className='menu__list'>
       <li className='menu__list-item'>
@@ -66,8 +98,13 @@ function NavBar() {
           Истории
         </NavLink>
       </li>
+      {locationCalendarWrap()}
+      {locationWhereToGoWrap()}
     </ul>
   );
 }
-
+NavBar.propTypes = {
+  loggedIn: PropTypes.bool.isRequired,
+  location: PropTypes.string.isRequired,
+};
 export default NavBar;
