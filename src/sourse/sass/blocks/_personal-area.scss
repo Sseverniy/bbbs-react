@@ -8,6 +8,9 @@
   align-items: flex-end;
   margin-top: 35px;
 }
+.personal-area__user-info-wrap {
+  display: none;
+}
 
 .personal-area__user-link {
   text-decoration: none;
@@ -244,10 +247,23 @@
   color: $lightGray;
 }
 
-@include atDesktop1024 {
+@include atDesktop1380 {
   .personal-area__user-info {
     display: none;
   }
+  .personal-area__user-info-wrap {
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+    margin-top: 35px;
+  }
+  .personal-area__button-top {
+    background: #fff;
+  }
+}
+
+@include atDesktop1024 {
+
 
   .personal-area__sign-up {
     padding-top: 20px;

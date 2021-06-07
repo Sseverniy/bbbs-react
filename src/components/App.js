@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { withRouter, Switch, Route, useHistory } from 'react-router-dom';
+import { withRouter, Switch, Route, useHistory, useLocation } from 'react-router-dom';
 import { format } from 'date-fns';
 import ruLocale from 'date-fns/locale/ru';
 import ProtectedRoute from './ProtectedRoute';
@@ -30,7 +30,7 @@ function App() {
   // const token =
   //   'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjIwNTM4OTMzLCJqdGkiOiIwOWZlNWUxNmI1MjI0YmM3ODJiYTc1YmM1OWExZWUzZSIsInVzZXJfaWQiOjF9._cDyG8Vp2HWzPPp-Hrm-P5FD5P0zcywVd4o4Gt2FL2M';
   // localStorage.setItem('access', token);
-
+  const { pathname } = useLocation();
   const [loggedIn, setLoggedIn] = useState(false);
   const [isCitiesPopupOpen, setCitiesPopupOpen] = useState(false);
   const [isLoginPopupOpen, setIsLoginPopupOpen] = useState(false);
@@ -82,14 +82,14 @@ function App() {
     setIsCaptionPopupOpen(!isCaptionPopupOpen);
   }
   function toggleModalConfirm() {
-    if(event1.booked) {
+    if (event1.booked) {
       renderLoader(true);
       signOutFromEvent(event1)
-      .then(()=>{
-        console.log('Вы успешно отменили запись');
-      })
-      .catch((err) => console.log(`Возникла ошибка ${err.message} при попытке отменить запись`))
-      .finally(()=> renderLoader(false));
+        .then(() => {
+          console.log('Вы успешно отменили запись');
+        })
+        .catch((err) => console.log(`Возникла ошибка ${err.message} при попытке отменить запись`))
+        .finally(() => renderLoader(false));
     } else {
       setIsConfirmPopupOpen(!isConfirmPopupOpen);
     }
@@ -113,7 +113,7 @@ function App() {
       .catch((err) => {
         console.log(err);
       })
-      .finally(()=> renderLoader(false));
+      .finally(() => renderLoader(false));
   }
 
   const handleLogin = (dataInput) => {
@@ -129,7 +129,7 @@ function App() {
       .catch((err) => {
         console.log(err);
       })
-      .finally(()=> renderLoader(false));
+      .finally(() => renderLoader(false));
   };
 
   const handleSignOut = () => {
@@ -202,7 +202,7 @@ function App() {
 
   return (
     <>
-      <Header toggleModal={toggleModalLogin} loggedIn={loggedIn} onSignOut={handleSignOut} />
+      <Header toggleModal={toggleModalLogin} loggedIn={loggedIn} onSignOut={handleSignOut} location={pathname} />
       <div className='main'>
         <Switch>
           <Route exact path='/'>
@@ -268,7 +268,7 @@ function App() {
       />
       <CalendarDonePopup toggleModal={toggleModalDone} isOpen={isDonePopupOpen} event1={event1} />
       <CitiesPopup toggleModal={toggleModalCities} cities={listOfCities} isOpen={isCitiesPopupOpen} />
-      <Loader isLoading={isLoading}/>
+      <Loader isLoading={isLoading} />
     </>
   );
 }
