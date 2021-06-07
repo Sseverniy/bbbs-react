@@ -6,7 +6,8 @@ import ruLocale from 'date-fns/locale/ru';
 import Meetup from './Meetup';
 import Title from './Title';
 
-function Calendar({ toggleModal, events, sortByMonth, listOfMonths, setEvent1 }) {
+
+function Calendar({toggleModal,events, sortByMonth, listOfMonths, setEvent1, toggleDone, loader}) {
   // const [selectedMonths, setSelectedMonths] = useState(['май','июнь','июль']);
 
   function getUniqueMonths() {
@@ -37,10 +38,8 @@ function Calendar({ toggleModal, events, sortByMonth, listOfMonths, setEvent1 })
           </ul>
         </div>
       </section>
-      <section className='calendar-container page__section'>
-        {listOfMonths.map((event) => (
-          <Meetup toggleModal={toggleModal} event1={event} key={event.id} setEvent1={setEvent1} />
-        ))}
+      <section className="calendar-container page__section">
+        {listOfMonths.map((event) => <Meetup toggleModal={toggleModal} event1={event} key={event.id} setEvent1={setEvent1} toggleDone={toggleDone} loader={loader}/>)}
       </section>
     </>
   );
@@ -79,6 +78,8 @@ Calendar.propTypes = {
       city: PropTypes.number,
     })
   ).isRequired,
+  toggleDone: PropTypes.func.isRequired,
+  loader: PropTypes.func.isRequired,
 };
 
 export default Calendar;

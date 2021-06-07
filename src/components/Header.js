@@ -2,8 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import NavBar from './NavBar';
+import SearchResponse from './SearchResponse';
 
-function Header({ toggleModal, loggedIn }) {
+function Header({ toggleModal, loggedIn, onSignOut }) {
   const [burgerClick, setBurgerClick] = useState(false);
   const [burgerWrap, setBurgerWrap] = useState(true);
   const [menuListHidden, setMenuListHidden] = useState(true);
@@ -104,7 +105,6 @@ function Header({ toggleModal, loggedIn }) {
           <span className='menu__burger-line' />
           <span className='menu__burger-line' />
         </button>
-
         <ul className='menu__button-list'>
           <li className='menu__button-item'>
             <form className='search' name='search-form'>
@@ -122,38 +122,7 @@ function Header({ toggleModal, loggedIn }) {
               >
                 <input type='text' name='search' placeholder='Поиск' className='search__input paragraph' />
                 <ul className='search__option-list'>
-                  <li className='search__option-item'>
-                    <a href='./article.html' className='search__title-link section-title section-title_clickable'>
-                      Причины подростковой агрессии
-                    </a>
-                    <a href='./article.html' className='link search__link'>
-                      статьи
-                    </a>
-                  </li>
-                  <li className='search__option-item'>
-                    <a href='./video.html' className='search__title-link section-title section-title_clickable'>
-                      Агрессивное поведение детей-сирот
-                    </a>
-                    <a href='./video.html' className='link search__link'>
-                      видео
-                    </a>
-                  </li>
-                  <li className='search__option-item'>
-                    <a href='./questions.html' className='search__title-link section-title section-title_clickable'>
-                      Что делать если ваш младший агрессивно себя ведет, решил закрыть пару?
-                    </a>
-                    <a href='./questions.html' className='link search__link'>
-                      вопросы
-                    </a>
-                  </li>
-                  <li className='search__option-item'>
-                    <a href='./books.html' className='search__title-link section-title section-title_clickable'>
-                      Как реагировать на агрессивное поведения ребенка
-                    </a>
-                    <a href='./books.html' className='link search__link'>
-                      книги
-                    </a>
-                  </li>
+                  <SearchResponse />
                 </ul>
               </div>
             </form>
@@ -183,24 +152,36 @@ function Header({ toggleModal, loggedIn }) {
                 title='Личный кабинет'
               />
             )}
-            {/* <button
-              className={`menu__button ${
-                loggedIn ? 'menu__button_type_active-user' : ' menu__button_type_user'
-              }`}
-              onClick={toggleModal}
-              type='button'
-              aria-label='Личный кабинет'
-              title='Личный кабинет'
-            /> */}
           </li>
         </ul>
       </nav>
+      {loggedIn ? (
+        <div className='personal-area__user-info'>
+          <p className='paragraph personal-area__user-link personal-area__user-link_type_city'>{`Москва. `}</p>
+          <button
+            type='button'
+            className='paragraph personal-area__user-link personal-area__user-link_type_exit personal-area__button-top'
+          >
+            Изменить город
+          </button>
+          <button
+            type='button'
+            className='paragraph personal-area__user-link personal-area__user-link_type_exit personal-area__button-top'
+            onClick={onSignOut}
+          >
+            Выйти
+          </button>
+        </div>
+      ) : (
+        ''
+      )}
     </header>
   );
 }
 Header.propTypes = {
   toggleModal: PropTypes.func.isRequired,
   loggedIn: PropTypes.bool.isRequired,
+  onSignOut: PropTypes.func.isRequired,
 };
 
 export default Header;

@@ -8,13 +8,22 @@ import Header from './Header';
 import Calendar from './Calendar';
 import Footer from './Footer';
 import About from './About';
+import WhereToGo from './WhereToGo';
 import PersonalArea from './PersonalArea';
 import LoginPopup from './LoginPopup';
 import CalendarConfirmPopup from './CalendarConfirmPopup';
 import CalendarCaptionPopup from './CalendarCaptionPopup';
 import CalendarDonePopup from './CalendarDonePopup';
 import CitiesPopup from './CitiesPopup';
-import { getInfoProfileUsers, authorize, getListCities, getHomePage, getListEvents } from '../utils/api';
+import Loader from './Loader';
+import {
+  getInfoProfileUsers,
+  authorize,
+  getListCities,
+  getHomePage,
+  getListEvents,
+  signOutFromEvent,
+} from '../utils/api';
 
 function App() {
   // пока захардкодим, чтобы тестировать
@@ -25,6 +34,8 @@ function App() {
   const [loggedIn, setLoggedIn] = useState(false);
   const [isCitiesPopupOpen, setCitiesPopupOpen] = useState(false);
   const [isLoginPopupOpen, setIsLoginPopupOpen] = useState(false);
+
+  const [isLoading, setIsLoading] = useState(false);
   // попапы календаря
   const [isCaptionPopupOpen, setIsCaptionPopupOpen] = useState(false);
   const [isConfirmPopupOpen, setIsConfirmPopupOpen] = useState(false);
@@ -55,6 +66,10 @@ function App() {
     city: 1,
   });
 
+  function renderLoader(option) {
+    setIsLoading(option);
+  }
+
   function toggleModalCities() {
     setCitiesPopupOpen(!isCitiesPopupOpen);
   }
@@ -67,19 +82,28 @@ function App() {
     setIsCaptionPopupOpen(!isCaptionPopupOpen);
   }
   function toggleModalConfirm() {
-    if (isCaptionPopupOpen) {
-      toggleModalCaption();
+    if(event1.booked) {
+      renderLoader(true);
+      signOutFromEvent(event1)
+      .then(()=>{
+        console.log('Вы успешно отменили запись');
+      })
+      .catch((err) => console.log(`Возникла ошибка ${err.message} при попытке отменить запись`))
+      .finally(()=> renderLoader(false));
+    } else {
+      setIsConfirmPopupOpen(!isConfirmPopupOpen);
     }
-    setIsConfirmPopupOpen(!isConfirmPopupOpen);
   }
   function toggleModalDone() {
     if (isConfirmPopupOpen) {
       toggleModalConfirm();
+      toggleModalCaption();
     }
     setIsDonePopupOpen(!isDonePopupOpen);
   }
 
   function handleTokenCheck(access) {
+    renderLoader(true);
     getInfoProfileUsers(access)
       .then(({ data }) => {
         if (data) {
@@ -88,24 +112,27 @@ function App() {
       })
       .catch((err) => {
         console.log(err);
-      });
+      })
+      .finally(()=> renderLoader(false));
   }
 
   const handleLogin = (dataInput) => {
     const { login, password } = dataInput;
+    renderLoader(true);
     return authorize(login, password)
       .then((data) => {
         if (data.data.access) {
           setLoggedIn(true);
-          localStorage.setItem('access', data.access);
+          localStorage.setItem('access', data.data.access);
         }
       })
       .catch((err) => {
         console.log(err);
-      });
+      })
+      .finally(()=> renderLoader(false));
   };
 
-  const hendleSignOut = () => {
+  const handleSignOut = () => {
     localStorage.removeItem('access');
     window.location.reload();
     history.push('/');
@@ -170,7 +197,7 @@ function App() {
 
   return (
     <>
-      <Header toggleModal={toggleModalLogin} loggedIn={loggedIn} />
+      <Header toggleModal={toggleModalLogin} loggedIn={loggedIn} onSignOut={handleSignOut} />
       <div className='main'>
         <Switch>
           <Route exact path='/'>
@@ -184,6 +211,7 @@ function App() {
               toggleModal={toggleModalCaption}
               event={listOfEvents[0]}
               setEvent1={setEvent1}
+              loader={renderLoader}
             />
           </Route>
           <Route exact path='/calendar'>
@@ -193,12 +221,17 @@ function App() {
               sortByMonth={sortByMonth}
               listOfMonths={listOfMonths}
               setEvent1={setEvent1}
+              toggleDone={toggleModalDone}
+              loader={renderLoader}
             />
           </Route>
           <Route exact path='/about'>
             <About />
           </Route>
-          <ProtectedRoute exact path='/profile' loggedIn={loggedIn} isLogOut={hendleSignOut} component={PersonalArea} />
+          <Route exact path='/where-to-go'>
+            <WhereToGo place={placeMain} />
+          </Route>
+          <ProtectedRoute exact path='/profile' loggedIn={loggedIn} component={PersonalArea} />
         </Switch>
       </div>
       <Footer />
@@ -213,11 +246,13 @@ function App() {
       <CalendarConfirmPopup
         toggleModal={toggleModalConfirm}
         isOpen={isConfirmPopupOpen}
-        nextPopup={toggleModalDone}
+        toggleDone={toggleModalDone}
         event1={event1}
+        loader={renderLoader}
       />
       <CalendarDonePopup toggleModal={toggleModalDone} isOpen={isDonePopupOpen} event1={event1} />
       <CitiesPopup toggleModal={toggleModalCities} cities={listOfCities} isOpen={isCitiesPopupOpen} />
+      <Loader isLoading={isLoading}/>
     </>
   );
 }
